@@ -26,6 +26,7 @@
 
 ## Nhật ký cập nhật
 
+- **19/11/2026 — v1.1.1 (vá nóng):** Vòng Xoáy Ngân Hà gọi liên tiếp đúng thiết kế — nút "Quay tiếp bạn nữa" quay ngay trong cùng phiên, dải sao đã gọi tích lũy tới khi đóng trò chơi.
 - **19/11/2026 — v1.1 (đợt vá theo góp ý dùng thử của thầy):**
   1. Màn mở đầu: bỏ nhãn "009 · Cửu"; nút "Vào lớp học" nằm phía trên, thẻ tác giả chuyển xuống dưới cùng trang.
   2. Thêm **Lịch dạy hôm nay**: khi mở lớp đúng thứ và tiết theo thời khóa biểu, app tự hiện lớp cùng tên bài dạy theo phân phối chương trình (đã sửa thứ 6: lớp 4/6 học tiết 3, lớp 4/5 học tiết 4).

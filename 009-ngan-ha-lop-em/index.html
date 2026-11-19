@@ -4789,7 +4789,7 @@ function hienKetQua(winners,opts){
  renderClass();
 }
 function troVongXoay(winners,pool){
- GAME.vxQueue=winners.slice();GAME.vxDone=[];
+ GAME.vxQueue=winners.slice();GAME.vxDone=[];GAME.vxRound=new Set();GAME.vxVongMoi=false;
  khungKetQua(winners,'<div class="orbit-wrap"><div class="orbit" id="g-orbit" style="--spd:0.7s"></div><div class="orbit-center"><span class="chip" style="background:#131c42;color:#ffd166;border-color:#ffd166" id="g-orbit-msg">Sẵn sàng quay…</span></div></div><div class="vx-space"></div>'
   +'<div class="called-strip"><div class="cs-title">DẢI SAO ĐÃ GỌI</div><div class="cs-items" id="g-strip-items"><span class="muted small" style="color:#b9c2ea">Chưa gọi bạn nào trong lượt này</span></div></div>');
  quayVongXoayLan();
@@ -4800,7 +4800,8 @@ function capNhatDaiSao(){
 }
 function quayVongXoayLan(){
  const w=GAME.vxQueue[0];if(!w)return;
- const remaining=GAME.pool.filter(id=>!GAME.vxDone.includes(id));
+ const daGoiVongNay=GAME.vxRound||new Set(GAME.vxDone);
+ const remaining=GAME.pool.filter(id=>!daGoiVongNay.has(id));
  const show=remaining.slice(0,14);if(!show.includes(w))show[0]=w;
  const R=128,cx=160,cy=160;
  const orb=$("#g-orbit");if(!orb)return;
@@ -4813,13 +4814,40 @@ function quayVongXoayLan(){
  setTimeout(()=>{
   if(!$("#g-orbit"))return;
   GAME.vxQueue.shift();GAME.vxDone.push(w);
+  if(!GAME.vxRound)GAME.vxRound=new Set();
+  GAME.vxRound.add(w);
   const o=$("#g-orbit");if(o)o.style.animation="none";
   const m2=$("#g-orbit-msg");if(m2)m2.textContent="Đã gọi "+GAME.vxDone.length+" bạn";
   capNhatDaiSao();
+  const vuaVongMoi=!!GAME.vxVongMoi;GAME.vxVongMoi=false;
   const conLai=GAME.vxQueue.length>0;
-  hienKetQua([w],{tiepTuc:conLai?quayVongXoayLan:null,nhanTiep:"Quay tiếp bạn nữa"});
-  if(!conLai)toast("Đã gọi đủ số bạn đã chọn trong lượt này");
+  hienKetQua([w],{tiepTuc:conLai?quayVongXoayLan:quayTiepVongXoay,nhanTiep:"Quay tiếp bạn nữa"});
+  if(vuaVongMoi){
+   const el=$("#g-result");
+   if(el){const note=document.createElement("div");note.className="q-box";note.style.borderColor="#ffd166";note.innerHTML="<b>Vòng mới bắt đầu!</b> Đã gọi hết các bạn có mặt trong lớp — từ lượt này, các bạn có thể được gọi lại từ đầu. Dải sao đã gọi vẫn được giữ nguyên.";el.insertBefore(note,el.firstChild);}
+   toast("Đã gọi hết lớp — bắt đầu vòng mới");
+  }
  },2900);
+}
+function quayTiepVongXoay(){
+ // Quay tiếp NGAY trong cùng phiên chơi: không thoát về Sảnh Gọi Sao, không đặt lại Dải sao,
+ // và không bị giới hạn bởi "Số bạn mỗi lượt" đã chọn ở màn thiết lập.
+ if(!GAME.vxRound)GAME.vxRound=new Set(GAME.vxDone||[]);
+ const pool=ungVien();
+ if(!pool.length){toast("Không còn bạn nào để gọi (cả lớp vắng?)");return;}
+ let avail=pool.filter(id=>!GAME.vxRound.has(id));
+ GAME.vxVongMoi=false;
+ if(!avail.length){
+  // Đã gọi hết các bạn có mặt trong lớp: bắt đầu vòng mới — cho phép gọi lại từ đầu, Dải sao vẫn giữ nguyên.
+  GAME.vxRound.clear();
+  avail=pool.slice();
+  GAME.vxVongMoi=true;
+ }
+ const w=chonNguoiNgauNhien(avail);
+ if(!w){toast("Không còn bạn nào để gọi");return;}
+ GAME.vxQueue=[w];
+ GAME.pool=pool.slice();
+ quayVongXoayLan();
 }
 function troDuaSao(winners,pool){
  // Tay đua = ĐÚNG tập học sinh đã chọn ở Sảnh Gọi Sao (winners) — không lấy thêm bất kỳ bạn nào từ cả lớp.
@@ -5368,7 +5396,7 @@ function renderSettings(){
  +'<h3 style="margin-top:1rem">'+ic("i-cal")+' Chuyển năm học mới</h3><p class="muted small">Trình 4 bước: đóng băng năm cũ → lên lớp hàng loạt → khối 5 ra trường → nhập khối 3 mới. App luôn lưu bản sao an toàn trước khi chạy.</p><button class="btn cyan" id="set-nammoi">Mở trình Chuyển năm học mới</button>'
  +'<h3 style="margin-top:1rem">'+ic("i-clock")+' Khung giờ tiết học</h3><p class="muted small">Giờ bắt đầu – kết thúc của từng tiết, dùng cho thẻ “Lịch dạy hôm nay” ở Sảnh Ngân Hà.</p><div id="set-gio">'
  +[["S","Sáng"],["C","Chiều"]].map(b=>'<div class="set-row"><span style="min-width:64px;font-weight:700">'+b[1]+"</span>"+Object.keys(GIO_TIET_MD[b[0]]).map(t=>{const g=(((C.gioTiet||GIO_TIET_MD)[b[0]]||{})[t])||GIO_TIET_MD[b[0]][t];return '<label class="small" style="display:inline-flex;align-items:center;gap:.3rem">Tiết '+t+' <input type="time" data-gio="'+b[0]+t+'-tu" value="'+g[0]+'"/> – <input type="time" data-gio="'+b[0]+t+'-den" value="'+g[1]+'"/></label>';}).join("")+"</div>").join("")+"</div>"
- +'<h3 style="margin-top:1rem">'+ic("i-book")+' Thông tin</h3><p class="small">Tác giả: <b>Lê Bảo Tú</b> — Giáo viên Tin học, Trường Tiểu học Huỳnh Ngọc Huệ.<br/>Nguồn dữ liệu: danh sách học sinh do nhà trường cung cấp; ngân hàng câu hỏi Tin học bám SGK Kết nối tri thức.<br/>Sản phẩm: <b>Ngân Hà Lớp Em</b> · Phiên bản <b>v1.1</b></p><p class="small muted">Cập nhật v1.1: thẻ “Lịch dạy hôm nay” tự hiện lớp, tiết và tên bài PPCT theo thời khóa biểu — chạm vào là vào thẳng lớp với bài đã điền sẵn; màn mở đầu gọn lại, bỏ dòng mã số dưới tên sản phẩm; Đường Đua Sao Băng thêm màn điểm danh đọc tên và chỉ tính đúng các bạn đã chọn; thay Cần Cẩu Hái Sao bằng Quả Cầu Ngân Hà; Vòng Xoáy Ngân Hà gọi liên tiếp kèm Dải sao đã gọi; tặng sao có hiệu ứng sao bay vào thẻ và hộp ghi nhận đóng ngay; Rương Sao Bí Ẩn bày đúng số bạn đã chọn, mở từng rương một.</p>'
+ +'<h3 style="margin-top:1rem">'+ic("i-book")+' Thông tin</h3><p class="small">Tác giả: <b>Lê Bảo Tú</b> — Giáo viên Tin học, Trường Tiểu học Huỳnh Ngọc Huệ.<br/>Nguồn dữ liệu: danh sách học sinh do nhà trường cung cấp; ngân hàng câu hỏi Tin học bám SGK Kết nối tri thức.<br/>Sản phẩm: <b>Ngân Hà Lớp Em</b> · Phiên bản <b>v1.1.1</b></p><p class="small muted">Cập nhật v1.1.1: Vòng Xoáy Ngân Hà nay quay tiếp được nhiều bạn liên tiếp trong cùng một lượt chơi, dải sao đã gọi được giữ nguyên cho tới khi đóng trò chơi.</p>'
  +'<div class="rowflex" style="justify-content:flex-end;margin-top:.6rem"><button class="btn primary" id="set-luu">Lưu cài đặt</button></div>',true);
  const docCaiDat=()=>{
   C.tenGiaoVien=$("#set-tengv").value.trim();
