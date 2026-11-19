@@ -16,7 +16,7 @@ Các sản phẩm ở đây **được sinh ra ngay tại GitHub**, chứ không
 - **GitHub Pages** là địa chỉ phát hành chính thức cho học sinh và đồng nghiệp sử dụng — bền vững, không phụ thuộc vào các dịch vụ chia sẻ miễn phí vốn có thể dừng hoạt động bất cứ lúc nào.
 - Mỗi sản phẩm có **thư mục riêng**, kèm mô tả, hướng dẫn sử dụng và nhật ký cập nhật, để giáo viên khác dễ dàng tìm hiểu, dùng lại và góp ý.
 
-> ### ⚡ Truy cập nhanh: **[Muse - Link sản phẩm](link-san-pham/)** — trang mục lục có ảnh bìa của cả 7 sản phẩm, bấm vào thẻ là mở ngay sản phẩm (rất tiện khi mở bằng điện thoại).
+> ### ⚡ Truy cập nhanh: **[Muse - Link sản phẩm](link-san-pham/)** — trang mục lục có ảnh bìa của cả 8 sản phẩm, bấm vào thẻ là mở ngay sản phẩm (rất tiện khi mở bằng điện thoại).
 
 ## 📦 Sổ đăng ký sản phẩm
 
@@ -29,6 +29,7 @@ Các sản phẩm ở đây **được sinh ra ngay tại GitHub**, chứ không
 | 5 | [005 — Hành trình tri thức](005-hanh-trinh-tri-thuc/) | ✅ Đã phát hành 16/11/2026 | Trò chơi bản đồ dài kỳ trên nền ngân hàng của 004: mỗi bài học là một chặng trên Đảo tri thức, hết chủ đề là Cổng ôn tập; tiến trình tích lũy theo lớp/tổ qua nhiều tuần, 2 chế độ Cả lớp / Đối kháng tổ, Sổ hành trình chỉ ra bài yếu, khóa chặng theo tuần học; chạy offline |
 | 6 | [006 — Xưởng Game Tri Thức](006-xuong-game-tri-thuc/) | ✅ Đã phát hành 17/11/2026 | Xưởng gắn vỏ game theo bài trên nền ngân hàng của 004: chọn bài → chọn vỏ → chơi ngay trong tiết (chưa tới 30 giây); 8 vỏ game mỗi vỏ một giao diện riêng (Kéo co tri thức — mỗi đội một bộ đáp án riêng, Leo núi chinh phục đỉnh, Đua thuyền rồng, Vòng quay tri thức, Mở ô kho báu, Bingo tri thức, Ai là triệu phú, Đua điểm tổ); 3 chế độ Cả lớp / Đối kháng tổ / Tiếp sức, tổng kết phiên theo mức độ TT27; chạy offline |
 | 7 | [007 — Truyện Tri Thức](007-truyen-tri-thuc/) | ✅ Đã phát hành 17/11/2026 · **Bản chính thức v2.0 ngày 18/11/2026** | Game nhập vai kể chuyện theo Môn → Chủ đề → Bài trên nền ngân hàng của 004: học sinh sống trong truyện, câu hỏi là chìa khóa mở cốt truyện — rẽ nhánh bỏ phiếu, sai rẽ sang cảnh biến cố có câu cứu viện, cuối chủ đề đấu trùm giữ cổng; 6 thế giới truyện (Vương quốc Số Học, Khu Vườn Ngôn Từ, Hòn Đảo Song Ngữ, Trạm Khám Phá Xanh, Xưởng Chế Tạo Nhỏ, Dòng Sông Thời Gian) với hơn 300 mùa truyện và gần 1.300 tập; tiến trình theo lớp xuyên nhiều tuần, xuất kết quả phiên cho 008; bản có mạng trước, gói cả thư mục chạy offline ở phòng Tin |
+| 8 | [009 — Ngân Hà Lớp Em](009-ngan-ha-lop-em/) | ✅ Đã phát hành 19/11/2026 | Ứng dụng sinh hoạt lớp học: mỗi lớp là một ngân hà, mỗi học sinh là một ngôi sao, mỗi tổ là một chòm sao; Sảnh Gọi Sao với 4 vỏ trò gọi tên ngẫu nhiên × 2 chế độ (Gọi Sao Thử Thách rút câu hỏi từ ngân hàng của 004 theo đúng bài đang dạy), tặng sao theo quy tắc, thang cấp sao 5 bậc, 8 huy chương vĩnh viễn, Trạm Đổi Sao đổi sao lấy đặc quyền trong lớp, hồ sơ sao đi theo học sinh từ lớp 3 lên lớp 5; nạp sẵn 21 lớp / 708 học sinh với bộ 40 nhân vật tự gán theo giới tính; chạy offline, đồng bộ Drive qua Apps Script |
 
 ## 🔖 Dấu ấn nhà trường
 
