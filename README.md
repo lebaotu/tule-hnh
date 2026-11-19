@@ -16,6 +16,8 @@ Các sản phẩm ở đây **được sinh ra ngay tại GitHub**, chứ không
 - **GitHub Pages** là địa chỉ phát hành chính thức cho học sinh và đồng nghiệp sử dụng — bền vững, không phụ thuộc vào các dịch vụ chia sẻ miễn phí vốn có thể dừng hoạt động bất cứ lúc nào.
 - Mỗi sản phẩm có **thư mục riêng**, kèm mô tả, hướng dẫn sử dụng và nhật ký cập nhật, để giáo viên khác dễ dàng tìm hiểu, dùng lại và góp ý.
 
+> ### ⚡ Truy cập nhanh: **[Muse - Link sản phẩm](link-san-pham/)** — trang mục lục có ảnh bìa của cả 7 sản phẩm, bấm vào thẻ là mở ngay sản phẩm (rất tiện khi mở bằng điện thoại).
+
 ## 📦 Sổ đăng ký sản phẩm
 
 | # | Sản phẩm | Trạng thái | Ghi chú |
