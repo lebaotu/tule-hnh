@@ -1,0 +1,39 @@
+# 002 — Ngân hàng câu hỏi & Trộn đề Tin học 3–5
+
+Ứng dụng web xây dựng **ngân hàng câu hỏi trắc nghiệm Tin học lớp 3–5** (sách Kết nối tri thức với cuộc sống) theo từng bài học và **trộn đề ngẫu nhiên** thành nhiều mã đề cho các lớp — dùng cho luyện tập giữa kỳ (không chấm điểm) và ra đề kiểm tra cuối kỳ I / cuối năm (chấm điểm, theo ma trận) tại Trường Tiểu học Huỳnh Ngọc Huệ.
+
+**Mở ứng dụng:** mở tệp `index.html` trong thư mục này bằng trình duyệt, hoặc qua GitHub Pages của repo (mục `002-ngan-hang-cau-hoi/`).
+
+## Chức năng
+
+- **17/11/2026 — v1.5.1:** tên trường ở màn hình mở đầu đổi sang font Baloo 2, màu xanh cyan sáng hài hòa tông bảng mạch (sáng/tối tự đổi).
+- **Tổng quan:** thống kê kho câu hỏi (tổng số câu, đã duyệt / chờ duyệt, theo khối), lối tắt vào các chức năng chính.
+- **Ngân hàng câu hỏi:** lọc theo khối, bài học, mức độ (Nhận biết / Kết nối / Vận dụng), trạng thái duyệt và tìm kiếm; mỗi câu có đáp án, lời giải thích, yêu cầu cần đạt và nguồn soạn; duyệt câu, đánh dấu cần sửa, thêm / sửa / xóa câu hỏi.
+- **Trộn đề:** hai hình thức — luyện tập giữa kỳ (không chấm điểm, hiện đáp án + giải thích) và đề kiểm tra (chỉ dùng câu **đã duyệt**, theo tỉ lệ mức độ 50/30/20, thang điểm 10). Phạm vi theo đợt (giữa HKI đến tuần 10, cuối HKI đến tuần 18, giữa HKII đến tuần 27, cuối năm đến tuần 35) hoặc tự chọn bài. Mỗi lớp một mã đề riêng, thứ tự câu và thứ tự đáp án được xáo trộn ngẫu nhiên, đáp án tính lại đúng theo vị trí sau trộn.
+- **Bộ đề đã tạo:** lưu trữ các mã đề đã sinh, mở xem lại, in lại.
+- **In hồ sơ đề:** bản học sinh (đề bài, không đáp án, đầu đề theo thể thức văn bản trường) và bản giáo viên (đáp án từng mã đề, ma trận đề, bảng đối chiếu câu ↔ bài học ↔ yêu cầu cần đạt ↔ mức độ) để tổ trưởng và ban giám hiệu kiểm tra.
+- **Cài đặt & dữ liệu:** khóa mã PIN, nạp / xuất gói ngân hàng câu hỏi dạng JSON, sao lưu / khôi phục qua USB, đồng bộ tự động qua Apps Script (mã mẫu dán-là-chạy kèm trong ứng dụng).
+
+## Nguyên tắc chất lượng
+
+- **AI soạn — thầy duyệt:** câu hỏi do AI soạn bám SGK/SGV/KHDH đều vào kho với trạng thái *Chờ duyệt*; chỉ câu đã được giáo viên duyệt mới được vào đề kiểm tra chấm điểm.
+- **Nguồn chuẩn:** Chương trình GDPT 2018 môn Tin học (TT32) → SGK/SGV Tin học Kết nối tri thức → Kế hoạch dạy học của giáo viên; đánh giá theo TT27 và TT89/2026.
+- **Offline trước hết:** chạy hoàn toàn không cần mạng tại phòng Tin; dữ liệu lưu trên thiết bị; đồng bộ Drive chỉ thực hiện khi có mạng.
+
+## Kỹ thuật
+
+Một tệp HTML duy nhất, không phụ thuộc thư viện ngoài, mở được trên mọi trình duyệt hiện đại, kể cả khi không có mạng.
+
+## Nhật ký cập nhật
+
+- **v1.5** (17/11/2026): vá lỗi tổng số câu hiển thị 1.124 thay vì 1.125 — sau khi vá ngân hàng v5.1 sửa chính tả, câu GROK-0613 trùng y hệt SEED-208 về nội dung, lựa chọn và đáp án (chỉ khác trạng thái) nên khóa gộp cũ theo khối + bài + nội dung đã nuốt mất nó khi nạp kho trực tuyến. Hàm gộp nay giữ một danh sách câu cho mỗi khóa và khớp theo trạng thái trước, nên tổng hiện đúng 1.125 câu (1.122 đã duyệt, 3 cần sửa); máy đã lỡ ở trạng thái 1.124 tự khớp lại sau lần cập nhật kho trực tuyến kế tiếp, cập nhật lặp lại không nhân đôi câu.
+- **Ngân hàng v5.1** (17/11/2026): vá dữ liệu theo đợt rà soát tuần 11 — sửa đáp án câu Vận dụng Lớp 5 Bài 6 (M-20261113-VD-HKI-16) từ C sang D cho khớp lời giải thích đi kèm; gắn cờ "Cần sửa" cho 2 câu trùng (GROK-0338 trùng SEED-112 ở Lớp 4 Bài 6, GROK-0613 trùng SEED-208 ở Lớp 5 Bài 6) nên số câu đủ điều kiện vào đề còn 1.122/1.125; sửa chính tả "cầu vòng" thành "cầu vồng" (SEED-208); bổ sung lời giải thích cho 66 câu của 3 bài tuần 11 (Lớp 3 Bài 5, Lớp 4 Bài 6, Lớp 5 Bài 6) — cả 3 bài nay đủ 69/69 câu có giải thích, toàn kho 147/1.125 câu có giải thích. Ứng dụng giữ nguyên v1.4, chỉ cập nhật tệp ngân hàng trực tuyến.
+- **v1.4** (13/11/2026): áp chuẩn thương hiệu mới như 003 — tên trường font serif Playfair Display màu xanh navy (#1E3A8C sáng / #A9C6F0 tối), logo thu nhỏ (46px màn mở đầu, 28px thanh đầu) và đưa lên cao nhất; tên sản phẩm dùng Be Vietnam Pro 800 với phần “Tin học 3–5” tô cyan nhấn, tiêu đề màn hình dùng Be Vietnam Pro 700; cả hai font nhúng thẳng vào tệp nên offline vẫn đúng font. Nút in đề nay mở bản xem trước A4 ngay trong trang thay vì gọi thẳng cửa sổ in. Ngân hàng câu hỏi, tải trực tuyến và đồng bộ Drive giữ nguyên.
+- **v1.3 + ngân hàng v5** (13/11/2026): phân loại mức độ cho toàn bộ 835 câu còn lại theo Thông tư 27 — cả kho 1.125 câu nay đều có mức độ (Nhận biết 575, Kết nối 429, Vận dụng 121), trong đó 1.124 câu đủ điều kiện vào đề kiểm tra chấm điểm; 1 câu (GROK-0685) bị gắn cờ đáp án chưa chắc chắn nên để trạng thái "Cần sửa", không vào đề. Ứng dụng 1.3 bổ sung cơ chế tự điền các trường còn trống trên máy (mức độ, giải thích, yêu cầu cần đạt) từ kho trực tuyến khi cập nhật ngân hàng, để mức độ mới phân loại chảy xuống máy của giáo viên mà không cần nạp lại dữ liệu.
+
+- **13/11/2026 — Ngân hàng trực tuyến v4:** khắc phục lỗi trường bài học ghi dạng tên đầy đủ khiến ứng dụng loại toàn bộ câu hỏi khi tải kho trực tuyến (0/272 câu qua được); đã chuẩn hóa trường bài học về mã bài. Ngân hàng lên **1.125 câu** (Lớp 3: 374, Lớp 4: 378, Lớp 5: 373), gồm 272 câu cũ đã chuẩn hóa + 835 câu trích xuất từ game "Kéo co tri thức" + 18 câu Vận dụng HKI mới; trong đó 290 câu đã phân loại mức độ (đủ điều kiện vào đề kiểm tra chấm điểm), 835 câu còn lại dùng cho luyện tập giữa kỳ, chờ phân loại theo TT27 ở đợt sau.
+- **13/11/2026 — v1.2:** câu hỏi Muse phát hành lên kho trực tuyến được coi là **đã duyệt sẵn** — giáo viên không cần bấm duyệt từng câu, chỉ đánh dấu "Cần sửa" khi phát hiện câu chưa đúng; quy tắc hợp nhất mới cho trạng thái duyệt và mức độ từ kho trực tuyến chảy xuống các câu chưa sửa tay trên máy, không bao giờ ghi đè câu đã duyệt / đã sửa tay / đang cần sửa. Tổng quan có dòng trạng thái ngân hàng trực tuyến luôn hiển thị. Ngân hàng đồng thời lên **272 câu** (222 câu sẵn có đã được Muse phân loại mức độ theo TT27 + 50 câu Muse soạn mới), tất cả ở trạng thái đã duyệt.
+- **13/11/2026 — v1.1:** ứng dụng **tự tải toàn bộ ngân hàng câu hỏi** từ tệp `ngan-hang-cau-hoi.json` trên chính repo này mỗi lần mở (khi có mạng) và hợp nhất thông minh vào kho trên thiết bị — không cần nạp tệp thủ công nữa; câu đã duyệt / đã sửa tay không bao giờ bị ghi đè; không có mạng (phòng Tin) thì dùng bản đã lưu trên máy. Thêm nút "Cập nhật ngân hàng trực tuyến" trong Cài đặt và dòng hướng dẫn thân thiện ở các bài chưa có câu hỏi.
+- **13/11/2026 — v1.0:** phát hành bản đầu tiên lên tule-hnh: giao diện phong cách "phòng lab số / bảng mạch điện tử" hoàn toàn mới, bộ icon SVG công nghệ riêng; đủ 5 màn hình; kho nạp sẵn 21 câu mẫu Lớp 3 Bài 1 (6 câu từ ngân hàng sẵn có của thầy + 15 câu Muse soạn có mức độ, yêu cầu cần đạt, lời giải thích — đều ở trạng thái chờ duyệt); trộn mã đề ngẫu nhiên đã kiểm thử 300 lần trộn không lỗi đáp án; kèm gói nạp mở rộng 237 câu hỏi.
+
+- **17/11/2026 — v1.5.2:** thay logo trường bằng bản sạch (đã xoá vòng trắng thừa quanh huy hiệu) và nâng cỡ logo màn hình mở đầu từ 46 lên 104×104 px theo chuẩn chung của nhà tule-hnh.
