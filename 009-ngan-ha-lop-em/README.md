@@ -14,7 +14,7 @@
 - **Sảnh Gọi Sao** — 4 vỏ trò gọi tên ngẫu nhiên (ưu tiên bạn ít được gọi, có công tắc không gọi trùng trong tiết):
   - **Vòng Xoáy Ngân Hà** — thẻ nhân vật xoay như dải ngân hà, dừng ở một ngôi sao và phóng to tỏa sáng.
   - **Đường Đua Sao Băng** — 6–8 ngôi sao ứng viên lao về đích, sao về nhất là bạn được gọi.
-  - **Cần Cẩu Hái Sao** — cần cẩu vũ trụ gắp một quả cầu sao trên bầu trời và mở ra tên bạn được gọi.
+  - **Quả Cầu Ngân Hà** — quả cầu vũ trụ chứa các ngôi sao của lớp, lắc cầu và một ngôi sao bay ra tỏa sáng là bạn được gọi.
   - **Rương Sao Bí Ẩn** — chạm mở một rương sao phát sáng, bên trong là bạn được gọi.
 - **Hai chế độ gọi tên:** *Gọi Sao* (chỉ gọi tên) và *Gọi Sao Thử Thách* (bạn được gọi trả lời một câu hỏi rút từ gói dữ liệu của 004 theo Môn → Lớp → Chủ đề → Bài; đúng tự cộng sao, sai hiện lời giải thích để thầy chốt kiến thức).
 - **Sao và cấp sao:** quy tắc cộng/trừ rõ ràng (Phát biểu tốt, Thực hành giỏi, Giúp đỡ bạn, Sáng tạo…; điểm trừ chỉ trừ sao khả dụng, không làm tụt cấp), thang cấp sao ngân hà 5 bậc, 8 huy chương vĩnh viễn trong hồ sơ.
@@ -26,4 +26,12 @@
 
 ## Nhật ký cập nhật
 
+- **19/11/2026 — v1.1 (đợt vá theo góp ý dùng thử của thầy):**
+  1. Màn mở đầu: bỏ nhãn "009 · Cửu"; nút "Vào lớp học" nằm phía trên, thẻ tác giả chuyển xuống dưới cùng trang.
+  2. Thêm **Lịch dạy hôm nay**: khi mở lớp đúng thứ và tiết theo thời khóa biểu, app tự hiện lớp cùng tên bài dạy theo phân phối chương trình (đã sửa thứ 6: lớp 4/6 học tiết 3, lớp 4/5 học tiết 4).
+  3. Đường Đua Sao Băng: chỉ các ứng viên trong danh sách đã chọn mới được đua và về đích; trước khi xuất phát hiện danh sách ứng viên để thầy đọc tên.
+  4. Thay vỏ trò Cần Cẩu Hái Sao bằng **Quả Cầu Ngân Hà**.
+  5. Vòng Xoáy Ngân Hà: gọi liên tiếp được nhiều bạn, kèm dải "đã gọi" hiển thị các sao đã chọn.
+  6. Tặng sao: hộp thoại đóng ngay khi chọn quy tắc, sao bay vào nhân vật kèm hiệu ứng.
+  7. Rương Sao Bí Ẩn: số rương mở đúng bằng số học sinh đã chọn.
 - **19/11/2026 — v1.0:** phát hành bản đầu tiên — Sảnh Gọi Sao với 4 vỏ trò × 2 chế độ (chế độ Thử Thách rút câu từ ngân hàng của 004), nạp sẵn 21 lớp / 708 học sinh với bộ 40 nhân vật tự gán theo giới tính, tặng sao theo quy tắc với thang cấp sao 5 bậc và 8 huy chương, Trạm Đổi Sao (quà đặc quyền), thi đua chòm sao, Bầu Trời Lớp, hồ sơ sao vĩnh cửu + Hành Trình Sao nhiều năm học, đồng bộ Drive qua Apps Script và sao lưu bằng tệp.
