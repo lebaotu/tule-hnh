@@ -97,7 +97,9 @@ label{font-weight:600}
 
 /* ---------- SPLASH ---------- */
 #screen-splash{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:1.2rem 1rem 1.4rem;text-align:center}
-.splash-logo{width:104px;height:104px;border-radius:50%;box-shadow:0 8px 30px rgba(0,0,0,.5);margin-top:.4rem}
+.splash-logo{width:104px;height:104px;border-radius:50%;box-shadow:0 6px 18px rgba(0,0,0,.22);margin-top:.4rem;animation:logoSway 9.6s ease-in-out infinite}
+@keyframes logoSway{0%{transform:rotate(0deg)}25%{transform:rotate(90deg)}50%{transform:rotate(0deg)}75%{transform:rotate(-90deg)}100%{transform:rotate(0deg)}}
+@media (prefers-reduced-motion: reduce){.splash-logo{animation:none}}
 .school-1{font-family:"Baloo 2",sans-serif;font-weight:700;font-size:clamp(1rem,3.4vw,1.35rem);letter-spacing:.35em;margin-top:.9rem;color:var(--ink2)}
 .school-2{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1.9rem,7vw,3.1rem);line-height:1.05;color:var(--gold);white-space:nowrap}
 .splash-cover{width:min(880px,94vw);border-radius:22px;margin:1.1rem 0 .4rem;box-shadow:var(--card-shadow);border:2px solid var(--line);object-fit:cover;aspect-ratio:16/7}
@@ -5567,7 +5569,7 @@ function renderSettings(){
  +'<h3 style="margin-top:1rem">'+ic("i-clock")+' Khung giờ tiết học</h3><p class="muted small">Giờ bắt đầu – kết thúc của từng tiết, dùng cho thẻ “Lịch dạy hôm nay” ở Sảnh Ngân Hà.</p><div id="set-gio">'
  +[["S","Sáng"],["C","Chiều"]].map(b=>'<div class="set-row"><span style="min-width:64px;font-weight:700">'+b[1]+"</span>"+Object.keys(GIO_TIET_MD[b[0]]).map(t=>{const g=(((C.gioTiet||GIO_TIET_MD)[b[0]]||{})[t])||GIO_TIET_MD[b[0]][t];return '<label class="small" style="display:inline-flex;align-items:center;gap:.3rem">Tiết '+t+' <input type="time" data-gio="'+b[0]+t+'-tu" value="'+g[0]+'"/> – <input type="time" data-gio="'+b[0]+t+'-den" value="'+g[1]+'"/></label>';}).join("")+"</div>").join("")+"</div>"
  +(UI.view==="lobby"?'<h3 style="margin-top:1rem">'+ic("i-undo")+' Đặt lại tiến trình lớp</h3><p class="muted small">Xoá sạch sao, lịch sử tiết, số lượt gọi tên, các lượt đổi quà và huy hiệu của MỘT lớp để bắt đầu lại từ đầu (ví dụ sau thời gian thử nghiệm). Danh sách học sinh, nhân vật và chòm sao được giữ nguyên. Quy trình có 2 lớp xác nhận, lớp cuối phải nhập lại mã truy cập.</p><div class="rowflex"><select id="rst-lop">'+Object.values(namData(namHienTai()).lop).sort((a,b)=>a.khoi-b.khoi||a.ten.localeCompare(b.ten,"vi")).map(l=>'<option value="'+l.id+'">Lớp '+esc(l.ten)+"</option>").join("")+'</select><button class="btn small danger" id="rst-go">Đặt lại lớp đã chọn…</button></div>':"")
- +'<h3 style="margin-top:1rem">'+ic("i-book")+' Thông tin</h3><p class="small">Tác giả: <b>Lê Bảo Tú</b> — Giáo viên Tin học, Trường Tiểu học Huỳnh Ngọc Huệ.<br/>Nguồn dữ liệu: danh sách học sinh do nhà trường cung cấp; ngân hàng câu hỏi Tin học bám SGK Kết nối tri thức.<br/>Sản phẩm: <b>Ngân Hà Lớp Em</b> · Phiên bản <b>v1.3</b></p><p class="small muted">'+GHI_CHU_V13+'</p>'
+ +'<h3 style="margin-top:1rem">'+ic("i-book")+' Thông tin</h3><p class="small">Tác giả: <b>Lê Bảo Tú</b> — Giáo viên Tin học, Trường Tiểu học Huỳnh Ngọc Huệ.<br/>Nguồn dữ liệu: danh sách học sinh do nhà trường cung cấp; ngân hàng câu hỏi Tin học bám SGK Kết nối tri thức.<br/>Sản phẩm: <b>Ngân Hà Lớp Em</b> · Phiên bản <b>v1.3.1</b></p><p class="small muted">'+GHI_CHU_V131+'</p>'
  +'<div class="rowflex" style="justify-content:flex-end;margin-top:.6rem"><button class="btn primary" id="set-luu">Lưu cài đặt</button></div>',true);
  /* v1.3: đọc form theo MÃ (id/tên) của từng mục thay vì theo số thứ tự — thứ tự hiển thị
     có lệch với mảng dữ liệu cũng không ghi nhầm sang mục khác. Mọi lần đọc đều lưu ngay xuống bộ nhớ. */
@@ -5697,14 +5699,14 @@ function moDatLaiLop(){
  };
 }
 /* ================= THÔNG TIN SẢN PHẨM ================= */
-const GHI_CHU_V13="Cập nhật v1.3: font chữ đã được nhúng thẳng vào app nên mở trên máy nào chữ cũng đẹp, không cần mạng hay cài thêm font; đã sửa lỗi chỉnh điểm cộng/trừ trong Cài đặt mà không lưu được — nay sửa ô nào là lưu ngay ô đó; lưới học sinh tự chia hàng đều nhau, không còn hàng cuối lẻ loi một mình; hộp thoại tặng/trừ sao hiện ngay giữa màn hình, không phải cuộn lên đầu trang nữa; thẻ học sinh có hiệu ứng viền phát sáng và nhấc nhẹ khi thầy chạm vào, giao diện ngân hà được trau chuốt sâu hơn; hiển thị chuẩn trên cả iPad lẫn máy tính của thầy.";
+const GHI_CHU_V131="Cập nhật v1.3.1: Logo trường biết đung đưa: quay chậm một phần tư vòng rồi quay về, bóng đổ nhẹ hơn cho màn mở đầu thoáng và có điểm nhấn.";
 function openInfo(){
  openModal(modalHead("Thông tin sản phẩm","i-book")
-  +'<p class="small">Sản phẩm: <b>Ngân Hà Lớp Em</b> · Phiên bản <b>v1.3</b></p>'
+  +'<p class="small">Sản phẩm: <b>Ngân Hà Lớp Em</b> · Phiên bản <b>v1.3.1</b></p>'
   +'<p class="small">Tác giả: <b>Lê Bảo Tú</b> — Giáo viên Tin học, Trường Tiểu học Huỳnh Ngọc Huệ, P. Thanh Khê, TP. Đà Nẵng.</p>'
   +'<p class="small">Ứng dụng sinh hoạt lớp học: mỗi lớp là một ngân hà, mỗi học sinh là một ngôi sao — tặng sao theo quy tắc, gọi tên bằng các vỏ trò ngân hà, thi đua chòm sao và Trạm Đổi Sao.</p>'
   +'<p class="small muted">Nguồn dữ liệu: danh sách học sinh do nhà trường cung cấp; ngân hàng câu hỏi Tin học bám SGK Kết nối tri thức.</p>'
-  +'<p class="small muted">'+GHI_CHU_V13+'</p>'
+  +'<p class="small muted">'+GHI_CHU_V131+'</p>'
   +'<div class="rowflex" style="justify-content:flex-end"><button class="btn primary" onclick="closeModal()">Đóng</button></div>');
 }
 

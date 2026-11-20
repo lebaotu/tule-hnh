@@ -26,6 +26,7 @@
 
 ## Nhật ký cập nhật
 
+- **20/11/2026 — v1.3.1:** logo trường ở màn mở đầu đung đưa quay chậm một phần tư vòng rồi quay về, bóng đổ nhẹ hơn làm điểm nhấn.
 - **20/11/2026 — v1.3:** nhúng font vào tệp (hết lỗi chữ bể khi không có mạng), sửa lưu điểm cộng/trừ trong Cài đặt (tự lưu khi sửa), lưới học sinh tự chia hàng đều, hộp thoại nổi giữa màn hình, giao diện ngân hà trau chuốt + hiệu ứng viền khi trỏ vào học sinh, hiển thị chuẩn iPad và máy giáo viên.
 - **20/11/2026 — v1.2:** bìa mới (thầy giáo), bộ 52 nhân vật học sinh người thay bộ thú, mã khoá vào lớp, Cài đặt/Thông tin ngay tại Sảnh, đặt lại tiến trình lớp thử nghiệm (xác nhận 2 lớp), thẻ tác giả ghim sát đáy trang.
 - **19/11/2026 — v1.1.1 (vá nóng):** Vòng Xoáy Ngân Hà gọi liên tiếp đúng thiết kế — nút "Quay tiếp bạn nữa" quay ngay trong cùng phiên, dải sao đã gọi tích lũy tới khi đóng trò chơi.
