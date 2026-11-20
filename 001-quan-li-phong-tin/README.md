@@ -37,3 +37,4 @@ Một tệp HTML duy nhất, không phụ thuộc thư viện ngoài, mở đư�
 - **13/11/2026 — v1.4.1:** sửa lại buổi dạy trong thời khóa biểu theo đúng Lịch báo giảng (khối sáng tối đa 4 tiết, khối chiều tối đa 3 tiết): 5 lớp bị gán nhầm buổi trong v1.4 (4/4 thứ 2, 4/3 thứ 3, 3/4 thứ 4, 5/5 thứ 5, 4/7 thứ 6) đã chuyển từ buổi sáng sang buổi chiều tiết 1; sáng thứ 4 và thứ 5 không có tiết Tin.
 
 - **17/11/2026 — v1.4.4:** thay logo trường bằng bản sạch (đã xoá vòng trắng thừa quanh huy hiệu) và nâng cỡ logo màn hình mở đầu lên 104×104 px theo chuẩn chung của nhà tule-hnh.
+- **20/11/2026 — v1.4.6:** sửa thời khóa biểu sáng thứ Sáu theo đính chính của giáo viên: lớp 4/6 học tiết 3, lớp 4/5 học tiết 4 (bản trước ghi tiết 2 và tiết 3 theo báo giảng là chưa đúng); nay khớp với 009.
