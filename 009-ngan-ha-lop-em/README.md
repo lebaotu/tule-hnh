@@ -26,6 +26,7 @@
 
 ## Nhật ký cập nhật
 
+- **20/11/2026 — v1.2:** bìa mới (thầy giáo), bộ 52 nhân vật học sinh người thay bộ thú, mã khoá vào lớp, Cài đặt/Thông tin ngay tại Sảnh, đặt lại tiến trình lớp thử nghiệm (xác nhận 2 lớp), thẻ tác giả ghim sát đáy trang.
 - **19/11/2026 — v1.1.1 (vá nóng):** Vòng Xoáy Ngân Hà gọi liên tiếp đúng thiết kế — nút "Quay tiếp bạn nữa" quay ngay trong cùng phiên, dải sao đã gọi tích lũy tới khi đóng trò chơi.
 - **19/11/2026 — v1.1 (đợt vá theo góp ý dùng thử của thầy):**
   1. Màn mở đầu: bỏ nhãn "009 · Cửu"; nút "Vào lớp học" nằm phía trên, thẻ tác giả chuyển xuống dưới cùng trang.
