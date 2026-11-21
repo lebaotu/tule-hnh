@@ -26,6 +26,7 @@
 
 ## Nhật ký cập nhật
 
+- **21/11/2026 — v1.3.3:** logo trường cắt lại sát viền xanh, bỏ vành sáng thừa ngoài huy hiệu.
 - **21/11/2026 — v1.3.2:** logo trường đung đưa chậm hơn (chu kỳ 15 giây) và biên độ hẹp lại còn 20 độ, ngọn đuốc luôn thẳng đứng trang trọng.
 - **20/11/2026 — v1.3.1:** logo trường ở màn mở đầu đung đưa quay chậm một phần tư vòng rồi quay về, bóng đổ nhẹ hơn làm điểm nhấn.
 - **20/11/2026 — v1.3:** nhúng font vào tệp (hết lỗi chữ bể khi không có mạng), sửa lưu điểm cộng/trừ trong Cài đặt (tự lưu khi sửa), lưới học sinh tự chia hàng đều, hộp thoại nổi giữa màn hình, giao diện ngân hà trau chuốt + hiệu ứng viền khi trỏ vào học sinh, hiển thị chuẩn iPad và máy giáo viên.
