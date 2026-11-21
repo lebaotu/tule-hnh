@@ -26,6 +26,7 @@
 
 ## Nhật ký cập nhật
 
+- **21/11/2026 — v1.3.4:** logo trường phóng đầy khung, viền xanh chạm sát mép hình tròn, hết vành sáng quanh huy hiệu.
 - **21/11/2026 — v1.3.3:** logo trường cắt lại sát viền xanh, bỏ vành sáng thừa ngoài huy hiệu.
 - **21/11/2026 — v1.3.2:** logo trường đung đưa chậm hơn (chu kỳ 15 giây) và biên độ hẹp lại còn 20 độ, ngọn đuốc luôn thẳng đứng trang trọng.
 - **20/11/2026 — v1.3.1:** logo trường ở màn mở đầu đung đưa quay chậm một phần tư vòng rồi quay về, bóng đổ nhẹ hơn làm điểm nhấn.
