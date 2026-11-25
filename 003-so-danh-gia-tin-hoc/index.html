@@ -504,7 +504,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
    01/12/2026), TT02/2025 (khung năng lực số), QĐ 2422 (khung giáo dục AI),
    TT32/2018 (năng lực tin học NLa/NLb/NLc), KHDH Tin 3–5 của giáo viên.
    ===================================================================== */
-const APP_VERSION = '1.2.2';   // Phiên bản sản phẩm 003 (giai đoạn 1 + đồng bộ tự động + tên trường Baloo 2 xanh Windows ở màn mở đầu & font tiêu đề nhúng offline)
+const APP_VERSION = '1.2.3';   // Phiên bản sản phẩm 003 (giai đoạn 1 + đồng bộ tự động + tên trường Baloo 2 xanh Windows ở màn mở đầu & font tiêu đề nhúng offline)
 const $  = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
 const uid = () => 'x' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
@@ -867,6 +867,10 @@ function suggestSummary(cls, hs, ky){
   const sc = S.scores[key3(cls, hs, ky)];
   const diem = sc && sc.diem !== null && sc.diem !== undefined && sc.diem !== '' ? +sc.diem : null;
   let muc = null, lyDo = [];
+  const savedSum = S.summaries[key3(cls, hs, ky)];
+  if (savedSum && savedSum.muc === 'MIEN'){
+    return { muc:'MIEN', lyDo:['Được miễn đánh giá môn Tin học theo kế hoạch giáo dục cá nhân (TT89/2026, Điều 8).'], diem:null, st, pl, batThuong:null };
+  }
   if (ky === 'GHKI' || ky === 'GHKII'){
     muc = pl; if (pl) lyDo.push(`Từ ${st.n} ghi nhận thường xuyên trong kì (điểm quá trình ${st.diemQT}).`);
   } else if (ky === 'CKHKI'){
@@ -902,7 +906,8 @@ function suggestSummary(cls, hs, ky){
 const SUMMARY_LEVELS = {
   HXS:{ ten:'Hoàn thành xuất sắc' }, HTT:{ ten:'Hoàn thành tốt' },
   HT:{ ten:'Hoàn thành' }, CHT:{ ten:'Chưa hoàn thành' },
-  TOT:{ ten:'Tốt' }, CCG:{ ten:'Cần cố gắng' }
+  TOT:{ ten:'Tốt' }, CCG:{ ten:'Cần cố gắng' },
+  MIEN:{ ten:'Miễn' }
 };
 function suggestComment(cls, hs, ky){
   const st = processStats(cls, hs, ky);
@@ -1369,15 +1374,16 @@ function renderScores(){
     <tbody>${stu.map((s, i) => {
       const sc = S.scores[key3(cls, s.id, ky)];
       const sug = suggestSummary(cls, s.id, ky);
+      const mien = S.summaries[key3(cls, s.id, ky)]?.muc === 'MIEN';
+      const scoreCell = mien ? '<b>Miễn</b>' : `<input class="score-inp" type="number" min="0" max="10" step="1" inputmode="numeric" value="${sc && sc.diem !== null && sc.diem !== undefined ? sc.diem : ''}" data-score="${s.id}" ${S.locks[`${cls}|${ky}`] ? 'disabled' : ''} placeholder="—" />`;
+      const doiChieu = mien ? '<span class="muted small">Miễn đánh giá</span>' : sug.batThuong ? `<span class="tag warn">${ICONS.warn.replace('class="ic"','class="ic sm"')} Bất thường</span>` : (sug.pl ? `<span class="muted small">Quá trình: ${MID_LEVELS[sug.pl].ten}</span>` : '<span class="muted small">Chưa có ghi nhận</span>');
       return `<tr>
         <td class="num">${i + 1}</td>
         <td><b>${esc(s.ten)}</b>${s.dien ? ` <span class="tag amber">${esc(s.dien)}</span>` : ''}</td>
-        <td class="num"><input class="score-inp" type="number" min="0" max="10" step="1" inputmode="numeric"
-            value="${sc && sc.diem !== null && sc.diem !== undefined ? sc.diem : ''}" data-score="${s.id}"
-            ${S.locks[`${cls}|${ky}`] ? 'disabled' : ''} placeholder="—" /></td>
-        <td>${sc ? esc(sc.nguon) : '<span class="muted">Chưa có điểm</span>'}</td>
+        <td class="num">${scoreCell}</td>
+        <td>${mien ? 'Miễn theo kế hoạch giáo dục cá nhân' : (sc ? esc(sc.nguon) : '<span class="muted">Chưa có điểm</span>')}</td>
         <td>${sc ? fmtDate(sc.ngay) : '—'}</td>
-        <td>${sug.batThuong ? `<span class="tag warn">${ICONS.warn.replace('class="ic"','class="ic sm"')} Bất thường</span>` : (sug.pl ? `<span class="muted small">Quá trình: ${MID_LEVELS[sug.pl].ten}</span>` : '<span class="muted small">Chưa có ghi nhận</span>')}</td>
+        <td>${doiChieu}</td>
       </tr>`; }).join('')}</tbody></table></div>
   <div class="row" style="margin-top:12px">
     <button class="btn primary" id="btnSaveScores" ${S.locks[`${cls}|${ky}`] ? 'disabled' : ''}>${ICONS.check} Lưu điểm lớp ${className(cls)}</button>
@@ -1449,9 +1455,9 @@ $('#fileScores').addEventListener('change', async e => {
 /* ================= TỔNG HỢP & CHỐT SỔ ================= */
 let sumState = { cls: '3-1', ky: null };
 function summaryLevelsFor(ky){
-  if (ky === 'GHKI' || ky === 'GHKII') return ['TOT', 'HT', 'CCG'];
-  if (ky === 'CKHKI') return ['HTT', 'HT', 'CHT'];
-  return ['HXS', 'HTT', 'HT', 'CHT'];
+  if (ky === 'GHKI' || ky === 'GHKII') return ['TOT', 'HT', 'CCG', 'MIEN'];
+  if (ky === 'CKHKI') return ['HTT', 'HT', 'CHT', 'MIEN'];
+  return ['HXS', 'HTT', 'HT', 'CHT', 'MIEN'];
 }
 function renderSummary(){
   const el = $('#scr-summary');
@@ -1509,7 +1515,7 @@ function renderSummary(){
     <tbody>${rows.map((r, i) => `<tr>
       <td class="num">${i + 1}</td>
       <td><b>${esc(r.s.ten)}</b>${r.s.dien ? `<br><span class="tag amber">${esc(r.s.dien)}</span>` : ''}<br><span class="small muted">${r.sug.st.n} ghi nhận · quá trình: ${r.sug.pl ? MID_LEVELS[r.sug.pl].ten : '—'}</span></td>
-      <td class="num">${r.sug.diem !== null ? `<b>${r.sug.diem}</b>` : '<span class="muted">trống</span>'}</td>
+      <td class="num">${r.eff === 'MIEN' ? '<b>Miễn</b>' : (r.sug.diem !== null ? `<b>${r.sug.diem}</b>` : '<span class="muted">trống</span>')}</td>
       <td>${r.sug.muc ? `<span class="lvl ${r.sug.muc}">${SUMMARY_LEVELS[r.sug.muc].ten}</span><br><span class="tiny muted">${esc(r.sug.lyDo[0] || '')}</span>` : '<span class="muted small">Chưa đủ dữ liệu</span>'}</td>
       <td><select data-sum-lvl="${r.s.id}" ${locked ? 'disabled' : ''} style="min-height:44px;border:1px solid var(--line2);border-radius:4px;padding:6px">
           <option value="">— Chưa chốt —</option>
@@ -1517,7 +1523,7 @@ function renderSummary(){
         </select></td>
       <td><textarea data-sum-nx="${r.s.id}" ${locked ? 'disabled' : ''} rows="2" style="width:100%;min-width:200px;border:1px solid var(--line2);border-radius:4px;padding:7px" placeholder="Nhận xét tổng hợp của kì…">${esc(r.nx ?? '')}</textarea>
         ${!r.nx ? `<button class="btn small" data-sug-nx="${r.s.id}" ${locked ? 'disabled' : ''}>${ICONS.spark.replace('class="ic"','class="ic sm"')} Gợi ý nhận xét</button>` : ''}</td>
-      <td>${r.sug.batThuong ? '<span class="tag warn">Điểm bất thường</span>' : (per.coDiem && r.sug.diem === null ? '<span class="tag">Chưa có điểm</span>' : '')}</td>
+      <td>${r.sug.batThuong ? '<span class="tag warn">Điểm bất thường</span>' : (per.coDiem && r.sug.diem === null && r.eff !== 'MIEN' ? '<span class="tag">Chưa có điểm</span>' : '')}</td>
       <td><button class="btn small primary" data-save-sum="${r.s.id}" ${locked ? 'disabled' : ''}>Lưu</button></td>
     </tr>`).join('')}</tbody></table></div>
 
@@ -1541,6 +1547,7 @@ function renderSummary(){
     const nx = $(`#scr-summary [data-sum-nx="${hs}"]`).value.trim();
     if (!lvl){ toast('Thầy chọn mức chốt cho em này trước nhé.'); return; }
     S.summaries[key3(cls, hs, ky)] = { muc: lvl, nx, chot: true, ngayChot: todayISO() };
+    if (lvl === 'MIEN'){ delete S.scores[key3(cls, hs, ky)]; }
     markDirty(); logAudit(`Chốt mức ${SUMMARY_LEVELS[lvl].ten} kì ${per.ten} cho ${studentById(cls, hs)?.ten || ''} (lớp ${className(cls)}).`);
     toast('Đã lưu mức & nhận xét tổng hợp.'); renderSummary();
   });
@@ -1571,15 +1578,35 @@ function renderSummary(){
   const bc = $('#btnExportCsv'); if (bc) bc.onclick = () => exportSummaryCsv(cls, ky);
 }
 
+/* Ký hiệu T/H/C để GVCN ghi vào Bảng tổng hợp kết quả đánh giá giáo dục của lớp
+   (Phụ lục 2, TT27/2020, sửa đổi bởi TT89/2026). Giữa kỳ là mức quan sát quá trình
+   nên quy đổi: Tốt → T, Hoàn thành → H, Cần cố gắng → C. Cuối năm, Hoàn thành xuất
+   sắc cũng ghi T (đạt mức Hoàn thành tốt trở lên); chữ đầy đủ vẫn giữ trong bảng. */
+function mucKyHieu(muc, ky){
+  if (muc === 'MIEN') return 'Miễn';
+  if (ky === 'GHKI' || ky === 'GHKII') return { TOT:'T', HT:'H', CCG:'C' }[muc] || '';
+  return { HXS:'T', HTT:'T', HT:'H', CHT:'C' }[muc] || '';
+}
+function mucXuat(muc, ky){
+  const ten = SUMMARY_LEVELS[muc] ? SUMMARY_LEVELS[muc].ten : muc;
+  if (muc === 'MIEN') return 'Miễn';
+  const kh = mucKyHieu(muc, ky);
+  return kh ? `${ten} (${kh})` : ten;
+}
+
 function summaryTableRows(cls, ky){
   return studentsOf(cls).map((s, i) => {
     const sum = S.summaries[key3(cls, s.id, ky)];
     const sug = suggestSummary(cls, s.id, ky);
     const muc = sum?.muc || sug.muc;
+    const mien = muc === 'MIEN';
     const sc = S.scores[key3(cls, s.id, ky)];
-    return { stt: i + 1, ten: s.ten, ns: s.ns, diem: sug.diem, nguon: sc ? sc.nguon : '',
-             muc: muc ? SUMMARY_LEVELS[muc].ten : '', nx: sum?.nx || suggestComment(cls, s.id, ky),
-             daChot: !!sum };
+    return { stt: i + 1, ten: s.ten, ns: s.ns, nu: s.gt === 'Nữ' ? 'x' : '',
+             diem: mien ? 'Miễn' : sug.diem,
+             nguon: mien ? 'Miễn theo kế hoạch giáo dục cá nhân' : (sc ? sc.nguon : ''),
+             muc: muc ? SUMMARY_LEVELS[muc].ten : '', mucXuat: muc ? mucXuat(muc, ky) : '',
+             nx: sum?.nx || (mien ? 'Miễn đánh giá môn Tin học theo kế hoạch giáo dục cá nhân.' : suggestComment(cls, s.id, ky)),
+             daChot: !!sum, mien };
   });
 }
 function downloadFile(name, content, type){
@@ -1590,13 +1617,21 @@ function downloadFile(name, content, type){
 function exportSummaryXls(cls, ky){
   const per = periodById(ky);
   const rows = summaryTableRows(cls, ky);
+  const today = todayISO().split('-');
+  const coMien = rows.some(r => r.mien);
+  const giuaKy = ky === 'GHKI' || ky === 'GHKII';
   const html = `<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8"></head><body>
   <table border="1">
-    <tr><td colspan="7"><b>TRƯỜNG TIỂU HỌC HUỲNH NGỌC HUỆ</b></td></tr>
-    <tr><td colspan="7"><b>BẢNG TỔNG HỢP KẾT QUẢ ĐÁNH GIÁ MÔN TIN HỌC — LỚP ${className(cls)} — ${per.ten.toUpperCase()} — NĂM HỌC ${esc(S.namHoc)}</b></td></tr>
-    <tr><td colspan="7">Giáo viên bộ môn: Lê Bảo Tú</td></tr>
-    <tr><th>STT</th><th>Họ và tên</th><th>Ngày sinh</th><th>Điểm KT</th><th>Nguồn điểm</th><th>Mức đánh giá</th><th>Nhận xét</th></tr>
-    ${rows.map(r => `<tr><td>${r.stt}</td><td>${esc(r.ten)}</td><td>${r.ns ? fmtDate(r.ns) : ''}</td><td>${r.diem ?? ''}</td><td>${esc(r.nguon)}</td><td>${esc(r.muc)}</td><td>${esc(r.nx)}</td></tr>`).join('')}
+    <tr><td colspan="8"><b>TRƯỜNG TIỂU HỌC HUỲNH NGỌC HUỆ</b></td></tr>
+    <tr><td colspan="8"><b>BẢNG TỔNG HỢP KẾT QUẢ ĐÁNH GIÁ MÔN TIN HỌC — LỚP ${className(cls)} — ${per.ten.toUpperCase()} — NĂM HỌC ${esc(S.namHoc)}</b></td></tr>
+    <tr><td colspan="8">Giáo viên bộ môn: Lê Bảo Tú</td></tr>
+    <tr><td colspan="8">Bảng môn học — dữ liệu để giáo viên chủ nhiệm tổng hợp vào Bảng tổng hợp kết quả đánh giá giáo dục của lớp (Phụ lục 2, TT27/2020, sửa đổi bởi TT89/2026).</td></tr>
+    <tr><th>STT</th><th>Họ và tên</th><th>Ngày sinh</th><th>Nữ</th><th>Điểm KT</th><th>Nguồn điểm</th><th>Mức đánh giá</th><th>Nhận xét</th></tr>
+    ${rows.map(r => `<tr><td>${r.stt}</td><td>${esc(r.ten)}</td><td>${r.ns ? fmtDate(r.ns) : ''}</td><td>${r.nu}</td><td>${r.diem ?? ''}</td><td>${esc(r.nguon)}</td><td>${esc(r.mucXuat)}</td><td>${esc(r.nx)}</td></tr>`).join('')}
+    ${giuaKy ? `<tr><td colspan="8">Ghi chú: Mức giữa kỳ là mức quan sát quá trình học tập; ký hiệu T/H/C trong ngoặc là quy đổi để giáo viên chủ nhiệm ghi vào Bảng tổng hợp kết quả đánh giá giáo dục của lớp (Phụ lục 2).</td></tr>` : ''}
+    ${coMien ? `<tr><td colspan="8">Ghi chú: Học sinh ghi “Miễn” được miễn đánh giá môn Tin học theo kế hoạch giáo dục cá nhân (TT89/2026, Điều 8).</td></tr>` : ''}
+    <tr><td colspan="8">Đà Nẵng, ngày ${+today[2]} tháng ${+today[1]} năm ${today[0]}</td></tr>
+    <tr><td colspan="8">Giáo viên bộ môn<br>(Ký, ghi rõ họ tên)<br><br><b>Lê Bảo Tú</b></td></tr>
   </table></body></html>`;
   downloadFile(`Bang-tong-hop-Tin-Lop-${className(cls).replace('/', '-')}-${ky}.xls`, html, 'application/vnd.ms-excel');
   logAudit(`Xuất Bảng tổng hợp (.xls) lớp ${className(cls)}, kì ${per.ten}.`);
@@ -1604,8 +1639,8 @@ function exportSummaryXls(cls, ky){
 }
 function exportSummaryCsv(cls, ky){
   const rows = summaryTableRows(cls, ky);
-  const csv = '﻿STT,Họ và tên,Ngày sinh,Điểm KT,Nguồn điểm,Mức đánh giá,Nhận xét\n' + rows.map(r =>
-    [r.stt, r.ten, r.ns ? fmtDate(r.ns) : '', r.diem ?? '', r.nguon, r.muc, r.nx].map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+  const csv = '\ufeffSTT,Họ và tên,Ngày sinh,Nữ,Điểm KT,Nguồn điểm,Mức đánh giá,Nhận xét\n' + rows.map(r =>
+    [r.stt, r.ten, r.ns ? fmtDate(r.ns) : '', r.nu, r.diem ?? '', r.nguon, r.mucXuat, r.nx].map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
   downloadFile(`Doi-chieu-hoc-ba-so-Lop-${className(cls).replace('/', '-')}-${ky}.csv`, csv, 'text/csv;charset=utf-8');
   toast('Đã tải CSV đối chiếu Học bạ số.');
 }
