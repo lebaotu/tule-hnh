@@ -44,6 +44,7 @@ input,select,textarea{font-family:inherit;}
 .icon-btn{width:44px; height:44px; min-width:44px; border-radius:10px; border:2px solid var(--line); background:var(--surface2); color:var(--ink); display:inline-flex; align-items:center; justify-content:center;}
 .icon-btn svg{width:22px; height:22px;}
 .icon-btn:active{transform:translateY(1px);}
+.icon-btn.off{opacity:.45;}
 .wrap{max-width:1060px; margin:0 auto; padding:16px 14px 40px;}
 
 /* ---------- Buttons ---------- */
@@ -561,6 +562,7 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
   <div class="play-top">
     <button class="icon-btn" id="play-exit" type="button" aria-label="Thoát về bản đồ mùa truyện"></button>
     <div class="pt-title" id="play-title"></div>
+    <button class="icon-btn" id="play-voice" type="button" aria-label="Bật / tắt giọng nhân vật"></button>
     <button class="icon-btn" id="play-mute" type="button" aria-label="Bật / tắt âm thanh"></button>
   </div>
   <div class="team-score-strip" id="team-strip"></div>
@@ -692,6 +694,10 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
         <div class="sr-txt"><div class="sr-t">Hiệu ứng âm thanh</div><div class="sr-d">Bộ tiếng theo diễn biến câu chuyện: chạm chọn, trả lời đúng / sai, biến cố và câu cứu viện, mở cổng, đánh trúng trùm, pháo mừng chiến thắng, nhận sao và Huy Hiệu Ánh Sao.</div></div>
         <label class="switch"><input type="checkbox" id="sw-sfx" aria-label="Hiệu ứng âm thanh"><span class="tr"></span></label>
       </div>
+      <div class="set-row">
+        <div class="sr-txt"><div class="sr-t">Giọng nhân vật</div><div class="sr-d">Toàn bộ thoại truyện được lồng tiếng riêng cho từng nhân vật — dòng thoại nào hiện ra, giọng của nhân vật đó vang lên. Tắt mục này thì lớp phân vai đọc thoại như trước; nhạc nền và hiệu ứng không đổi. Trên màn hình chơi cũng có nút giọng để bật / tắt nhanh.</div></div>
+        <label class="switch"><input type="checkbox" id="sw-voice" aria-label="Giọng nhân vật"><span class="tr"></span></label>
+      </div>
     </div>
     <div class="panel">
       <h3>Tiến trình các lớp</h3>
@@ -714,8 +720,8 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
         <p><b>Dữ liệu truyện:</b> Thư viện Ánh Sao gồm các thế giới truyện của 7 môn học, 315 mùa truyện và 1.330 tập truyện, cùng các tập đấu trùm ở cuối mỗi chủ đề và sự kiện Đêm Chung Kết. Mỗi mùa truyện bám theo một chủ đề, mỗi tập truyện bám theo một bài học trong sách giáo khoa, để học sinh vừa phiêu lưu cùng Biệt đội Ánh Sao vừa ôn luyện đúng kiến thức của bài. Cốt truyện, lời thoại và thử thách được soạn riêng cho từng bài; câu hỏi trong thử thách được rút từ ngân hàng câu hỏi của đúng bài học đó.</p>
         <p><b>Ảnh minh họa:</b> ảnh được nạp từ thư mục “anh” đặt cạnh tệp của sản phẩm; mở tập nào app mới nạp ảnh của tập đó. Khi thư mục ảnh chưa có (ví dụ mở bản xem trước), truyện vẫn chơi trọn vẹn với nền cảnh dự phòng.</p>
         <p><b>Sự kiện Đêm Chung Kết:</b> ở Sảnh thư viện, mọi lớp đều dự được (không khóa tuần, không cần hoàn thành mùa nào trước). Cả lớp lần lượt thắp sáng các Cổng Thế Giới của khối lớp mình — mỗi cổng 2 đòn tri thức mức Kết nối/Vận dụng rút từ chính thế giới đó, trả lời sai có câu cứu viện mức Nhận biết của nhân vật dẫn đường — rồi đối mặt trùm cuối Sương Mù Quên Lãng với 6 đòn tổng hợp. Hoàn thành đêm, lớp nhận Huy Hiệu Ánh Sao trong Album hành trình.</p>
-        <p><b>Cập nhật v3.0:</b> toàn bộ dữ liệu truyện và câu hỏi chuyển sang cấp phát từ kho Google của thầy qua dịch vụ dữ liệu riêng — nhập mã xong app tự xin dữ liệu; gói đã tải được lưu đệm trên máy để mở lại nhanh và chịu được mạng yếu. Bản USB offline ở phòng Tin vẫn tự chứa đầy đủ như cũ.</p>
-        <p><b>Phiên bản:</b> v3.0 — xây trên bản chính thức v2.0 Đêm Chung Kết (Final Release), bản chính thức đầu tiên của sản phẩm. Thư viện Ánh Sao đã đủ trọn 6 thế giới với 315 mùa truyện, 1.330 tập, và mở thêm sự kiện đặc biệt Đêm Chung Kết — trận quyết chiến cuối cùng với Sương Mù Quên Lãng dành cho mọi lớp.</p>
+        <p><b>Cập nhật:</b> v3.1 — Bản lồng tiếng: toàn bộ thoại truyện đã có giọng nói riêng cho từng nhân vật (10.498 dòng, 21 vai). Bật/tắt giọng nhân vật trong Cài đặt hoặc ngay trên màn hình chơi; tắt thì lớp phân vai như trước. Nhạc nền và hiệu ứng không đổi.</p>
+        <p><b>Phiên bản:</b> v3.1 — xây trên bản chính thức v2.0 Đêm Chung Kết (Final Release), bản chính thức đầu tiên của sản phẩm. Thư viện Ánh Sao đã đủ trọn 6 thế giới với 315 mùa truyện, 1.330 tập, và mở thêm sự kiện đặc biệt Đêm Chung Kết — trận quyết chiến cuối cùng với Sương Mù Quên Lãng dành cho mọi lớp.</p>
       </div>
     </div>
   </div>
@@ -881,7 +887,7 @@ var CAU_TIENG_ANH_THEO_LOP = {};
 var CAU_KHOA_HOC_THEO_LOP = {};
 var CAU_CONG_NGHE_THEO_LOP = {};
 var CAU_LICH_SU_DIA_LI_THEO_LOP = {};
-var PHIEN_BAN = "v3.0";
+var PHIEN_BAN = "v3.1";
 var DICH_VU_DL_URL = "https://script.google.com/macros/s/AKfycbyzLjsUUtfUBXK3LZXBNtQfy36dX0EMtXVBQspmpRipNAE3QSI8yopI0zzS8EFMiS0gcw/exec";
 var PB_DULIEU = "v3.0";
 var NHAN_VAT_TO = ["Minh Anh", "Tuấn Kiệt", "Thảo Nguyên", "Đức Trí", "Thủ thư Số", "Người đọc dũng cảm"];
@@ -1317,6 +1323,198 @@ function napGoi(mon, lop, cb){
   document.head.appendChild(sc);
 }
 
+/* ================= LỒNG TIẾNG NHÂN VẬT (v3.1) =================
+   Mỗi tập có một gói âm thanh riêng, khóa theo bộ ba "<pack>|<muaId>|<tapId>"
+   (pack là khóa gói __GOI007 của (môn, lớp), ví dụ "tin-3", "tieng-viet-1";
+   tapId kể cả tập trùm "trum"). Trong gói, mỗi dòng thoại có khóa
+   "<canh>-<dong>": canh là chỉ số 1-based của cảnh trong tap.canh[], dong là
+   chỉ số 1-based của dòng trong canh.dong[] — đúng khóa mà convertScenes()
+   gắn vào từng bước thoại của tập (st.vk). Các cảnh rẽ nhánh con (trong
+   luaChon) không nằm trong tap.canh[] nên không mang khóa — bỏ qua lặng lẽ.
+   Tập tổng kết Đêm Chung Kết là tập tổng hợp, không có gói âm thanh: các
+   bước của đêm không qua convertScenes của tập nên cũng không mang khóa.
+   Nguồn gói theo thứ tự ưu tiên, nạp TRƯỚC khi vào tập (chuanBiGiong được
+   gọi ngay khi mở màn thiết lập của tập và khi bắt đầu tập):
+     (a) đệm IndexedDB "ttt007-dem-am" / store "tap";
+     (b) bản USB (location.protocol === "file:"): tệp tương đối
+         audio/<pack>/<muaId>/<tapId>/<canh>-<dong>.mp3 đặt cạnh index.html;
+     (c) Dịch vụ dữ liệu Google hiện có:
+         ?amthanh=<pack>/<muaId>/<tapId>&chia=<chuỗi băm trong bộ nhớ phiên>.
+   Mọi lỗi (mất mạng, chưa có audio, đệm hỏng...) đều được nuốt êm: truyện
+   vẫn chạy dạng chữ như trước, TUYỆT ĐỐI không chặn truyện, không báo lỗi.
+   Phát bằng MỘT phần tử Audio dùng chung + ObjectURL từ Blob của dòng;
+   KHÔNG tự chuyển dòng khi tiếng kết thúc — nhịp tiết vẫn do thầy điều
+   khiển bằng nút Tiếp như cũ. Thiếu audio của một dòng thì bỏ qua lặng lẽ. */
+var amBoDem = {};      /* khoaTap -> { "<canh>-<dong>": Blob } */
+var amTrangThai = {};  /* khoaTap -> loading | ready | empty (chỉ trong phiên) */
+var amAudio = null;    /* phần tử Audio dùng chung cho mọi dòng thoại */
+var amURL = null;      /* ObjectURL đang phát, thu hồi ngay khi dừng */
+function giongBat(){ return !!(state && state.settings && state.settings.giongNhanVat); }
+function khoaTapAm(pack, muaId, tapId){ return pack + "|" + muaId + "|" + tapId; }
+function dungGiong(){
+  if (amAudio) {
+    try { amAudio.pause(); } catch (e) {}
+    try { amAudio.removeAttribute("src"); } catch (e) {}
+  }
+  if (amURL) { try { URL.revokeObjectURL(amURL); } catch (e) {} amURL = null; }
+}
+function phatGiong(vk){
+  if (!vk || !giongBat() || !S || FIN) return;
+  var goi = S.amKhoa ? amBoDem[S.amKhoa] : null;
+  var blob = goi ? goi[vk] : null;
+  if (!blob) return; /* thiếu audio của dòng này: bỏ qua lặng lẽ */
+  dungGiong();
+  try {
+    if (!amAudio) amAudio = new Audio();
+    amURL = URL.createObjectURL(blob);
+    amAudio.src = amURL;
+    var p = amAudio.play();
+    if (p && p.catch) p.catch(function(){});
+  } catch (e) {}
+}
+function datGiongNhanVat(bat){
+  if (!state || !state.settings) return;
+  state.settings.giongNhanVat = !!bat;
+  saveState();
+  if (!bat) dungGiong(); /* tắt giữa chừng: dừng tiếng ngay */
+  refreshVoiceUI();
+}
+/* Đồng bộ hai chỗ điều khiển giọng: công tắc trong Cài đặt và nút trên màn chơi */
+function refreshVoiceUI(){
+  var on = giongBat();
+  var sw = $("sw-voice"); if (sw) sw.checked = on;
+  var b = $("play-voice");
+  if (b) {
+    b.innerHTML = on ? ICON.voiceOn : ICON.voiceOff;
+    b.classList.toggle("off", !on);
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    b.setAttribute("aria-label", on ? "Giọng nhân vật đang bật — chạm để tắt" : "Giọng nhân vật đang tắt — chạm để bật");
+    b.title = on ? "Giọng nhân vật: đang bật" : "Giọng nhân vật: đang tắt";
+  }
+}
+/* --- Đệm IndexedDB cho gói âm thanh: mọi lỗi đệm đều nuốt êm như đệm gói --- */
+function amDemDoc(khoaTap, cb){
+  var xongRoi = false;
+  var bomHen = setTimeout(function(){ xong(null); }, 6000); /* Đệm bị treo thì bỏ qua, không kẹt luồng */
+  function xong(v){ if (xongRoi) return; xongRoi = true; clearTimeout(bomHen); cb(v); }
+  try {
+    if (!window.indexedDB) { xong(null); return; }
+    var req = indexedDB.open("ttt007-dem-am", 1);
+    req.onupgradeneeded = function(){ try { req.result.createObjectStore("tap"); } catch (e) {} };
+    req.onerror = function(){ xong(null); };
+    req.onsuccess = function(){
+      try {
+        var db = req.result;
+        var getReq = db.transaction("tap", "readonly").objectStore("tap").get(khoaTap);
+        getReq.onsuccess = function(){ var v = getReq.result; try { db.close(); } catch (e) {} xong(v && typeof v === "object" ? v : null); };
+        getReq.onerror = function(){ try { db.close(); } catch (e) {} xong(null); };
+      } catch (e) { xong(null); }
+    };
+  } catch (e) { xong(null); }
+}
+function amDemGhi(khoaTap, goi){
+  try {
+    if (!window.indexedDB || !goi) return;
+    var req = indexedDB.open("ttt007-dem-am", 1);
+    req.onupgradeneeded = function(){ try { req.result.createObjectStore("tap"); } catch (e) {} };
+    req.onerror = function(){};
+    req.onsuccess = function(){
+      try {
+        var db = req.result;
+        var tx = db.transaction("tap", "readwrite");
+        tx.objectStore("tap").put(goi, khoaTap);
+        tx.oncomplete = function(){ try { db.close(); } catch (e) {} };
+        tx.onerror = function(){ try { db.close(); } catch (e) {} };
+      } catch (e) {}
+    };
+  } catch (e) {}
+}
+function b64ThanhBlob(b64){
+  try {
+    var bin = atob(b64), len = bin.length, bytes = new Uint8Array(len);
+    for (var i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+    return new Blob([bytes], { type: "audio/mpeg" });
+  } catch (e) { return null; }
+}
+/* Danh sách khóa dòng thoại của một tập — khớp đúng khóa convertScenes gắn */
+function cacKhoaDongCuaTap(tap){
+  var keys = [];
+  (tap.canh || []).forEach(function(c, ci){
+    (c.dong || []).forEach(function(d, di){ keys.push((ci + 1) + "-" + (di + 1)); });
+  });
+  return keys;
+}
+function chuanBiGiong(m, tap){
+  if (!m || !tap || !tap.canh) return;
+  var pack = khoaGoi(m.mon, m.lop);
+  if (!pack) return;
+  var kk = khoaTapAm(pack, m.id, tap.id);
+  if (amTrangThai[kk]) return; /* đang nạp / đã có / đã biết là trống: không nạp lại */
+  amTrangThai[kk] = "loading";
+  amDemDoc(kk, function(goi){
+    if (goi && Object.keys(goi).length) { amBoDem[kk] = goi; amTrangThai[kk] = "ready"; return; }
+    if (window.location && location.protocol === "file:") napGiongTuTep(kk, pack, m.id, tap.id, tap);
+    else napGiongTuDichVu(kk, pack, m.id, tap.id);
+  });
+}
+/* Nguồn (b): tệp mp3 đặt cạnh app (bản USB offline). Gom đủ mọi dòng thì
+   đưa vào đệm; mới được một phần thì giữ trong bộ nhớ phiên để dùng ngay;
+   không được tệp nào thì mới sang nguồn dịch vụ. */
+function napGiongTuTep(kk, pack, muaId, tapId, tap){
+  var keys = cacKhoaDongCuaTap(tap);
+  if (!keys.length) { amTrangThai[kk] = "empty"; return; }
+  var goi = {}, daXong = 0, duDu = true;
+  keys.forEach(function(k){
+    fetch("audio/" + pack + "/" + muaId + "/" + tapId + "/" + k + ".mp3").then(function(res){
+      if (!res.ok) throw new Error("no-file");
+      return res.blob();
+    }).then(function(blob){
+      goi[k] = blob;
+    }).catch(function(){
+      duDu = false;
+    }).then(function(){
+      daXong++;
+      if (daXong < keys.length) return;
+      if (Object.keys(goi).length) {
+        amBoDem[kk] = goi; amTrangThai[kk] = "ready";
+        if (duDu) amDemGhi(kk, goi);
+      } else napGiongTuDichVu(kk, pack, muaId, tapId);
+    });
+  });
+}
+/* Nguồn (c): Dịch vụ dữ liệu Google — cùng cổng chìa với bộ nạp gói dữ liệu.
+   Lỗi "sai-chia" / "dang-tat" khóa lại theo đúng luồng sẵn có; mọi lỗi khác
+   chỉ làm tập này chạy dạng chữ lặng lẽ. */
+function napGiongTuDichVu(kk, pack, muaId, tapId){
+  if (!chiaDuLieu) { amTrangThai[kk] = "empty"; return; }
+  var hetGio = null, ctrl = null, opts = {};
+  try {
+    if (window.AbortController) {
+      ctrl = new AbortController();
+      opts.signal = ctrl.signal;
+      hetGio = setTimeout(function(){ try { ctrl.abort(); } catch (e) {} }, 45000);
+    }
+  } catch (e) {}
+  var url = DICH_VU_DL_URL + "?amthanh=" + encodeURIComponent(pack + "/" + muaId + "/" + tapId) + "&chia=" + encodeURIComponent(chiaDuLieu);
+  fetch(url, opts).then(function(res){ return res.text(); }).then(function(text){
+    if (hetGio) clearTimeout(hetGio);
+    var j = null;
+    try { j = JSON.parse(text); } catch (e) {}
+    if (!j || j.ok === false) {
+      if (j && (j.loi === "sai-chia" || j.loi === "dang-tat")) khoaLaiViDichVu(j.loi);
+      amTrangThai[kk] = "empty";
+      return;
+    }
+    var goi = {};
+    if (j.cacDong) for (var k in j.cacDong) { var b = b64ThanhBlob(j.cacDong[k]); if (b) goi[k] = b; }
+    if (Object.keys(goi).length) { amBoDem[kk] = goi; amTrangThai[kk] = "ready"; amDemGhi(kk, goi); }
+    else amTrangThai[kk] = "empty";
+  }).catch(function(){
+    if (hetGio) clearTimeout(hetGio);
+    amTrangThai[kk] = "empty"; /* mất mạng / chưa có audio: chơi tiếp dạng chữ lặng lẽ */
+  });
+}
+
 /* ================= ICON LINE SVG TỰ VẼ ================= */
 function ic(paths, vb){
   return '<svg viewBox="' + (vb || "0 0 24 24") + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + paths + '</svg>';
@@ -1335,6 +1533,8 @@ var ICON = {
   gear: ic('<circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/>'),
   soundOn: ic('<path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9.5a4 4 0 0 1 0 5"/><path d="M18 7a7.5 7.5 0 0 1 0 10"/>'),
   soundOff: ic('<path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/>'),
+  voiceOn: ic('<circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c.8-3.2 2.8-4.8 5.5-4.8s4.7 1.6 5.5 4.8"/><path d="M16.8 9.8a3.6 3.6 0 0 1 0 4.4"/><path d="M19 7.4a7 7 0 0 1 0 9.2"/>'),
+  voiceOff: ic('<circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c.8-3.2 2.8-4.8 5.5-4.8s4.7 1.6 5.5 4.8"/><path d="M16.3 10.2l4.9 4.9M21.2 10.2l-4.9 4.9"/>'),
   exit: ic('<path d="M6 4.5H4.5v15H6"/><path d="M10 12h10.5"/><path d="M16.5 7.5L21 12l-4.5 4.5"/>'),
   album: ic('<rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="10" r="2.4"/><path d="M5 18c1.8-2.2 4-3.2 7-3.2s5.2 1 7 3.2"/>'),
   play: ic('<path d="M8 5.5l11 6.5-11 6.5z"/>'),
@@ -1346,7 +1546,7 @@ var LS_KEY = "ttt007_v1";
 var state = null;
 function defaultState(){
   return {
-    settings: { khoaTuan: true, amThanh: true, nhac: true, hieuUng: true },
+    settings: { khoaTuan: true, amThanh: true, nhac: true, hieuUng: true, giongNhanVat: true },
     lopHienTai: "",
     muaChon: "",
     classes: {}
@@ -1358,6 +1558,8 @@ function loadState(){
     if (raw) { state = JSON.parse(raw); if (!state.settings || !state.classes) state = defaultState(); }
     else state = defaultState();
   } catch (e) { state = defaultState(); }
+  /* Tiến trình lưu từ bản trước v3.1 chưa có khóa giọng nhân vật: mặc định BẬT */
+  if (state.settings && typeof state.settings.giongNhanVat !== "boolean") state.settings.giongNhanVat = true;
 }
 function saveState(){
   try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
@@ -1959,6 +2161,7 @@ function nhacTheoManHinh(id){
 /* ================= ĐIỀU HƯỚNG MÀN HÌNH ================= */
 var currentScreen = "scr-splash";
 function showScreen(id){
+  if (id !== "scr-play") dungGiong(); /* rời màn chơi: dừng giọng ngay (v3.1) */
   var secs = document.querySelectorAll(".screen");
   for (var i = 0; i < secs.length; i++) secs[i].classList.toggle("active", secs[i].id === id);
   currentScreen = id;
@@ -2318,6 +2521,7 @@ function openSetup(muaId, tapId){
   }
   apDungTheGioi(m.mon);
   setupCtx.muaId = muaId; setupCtx.tapId = tapId; setupCtx.mode = "calop"; setupCtx.soTo = 4;
+  chuanBiGiong(m, tap); /* v3.1: nạp trước gói giọng của tập ngay khi mở tập, không chờ tới dòng đầu */
   $("setup-tap-name").textContent = tap.ten;
   $("setup-tap-meta").textContent = m.tenMua + " · Lớp " + state.lopHienTai + " · " + (tap.laTapTrum ? "Ôn tập tổng hợp Bài " + String(tap.bai).split("+").join(" + ") : ("Bài " + tap.bai + " — " + tenBai(tap.bai).replace(/^Bài \d+[A-Z]?\.\s*/, ""))) + " · Tuần " + tap.tuan + (tap.laTapTrum ? " · Tập đặc biệt đấu trùm với Sương Mù Quên Lãng" : "");
   syncSetupUI();
@@ -2427,14 +2631,18 @@ function preloadTapImages(m, tap){
   if (ak) keys[ak] = true;
   for (var k in keys) taiAnh(k);
 }
-function convertScenes(scenes, anhCanhKet){
+function convertScenes(scenes, anhCanhKet, coGiong){
+  /* coGiong chỉ đúng với tap.canh[] của tập: mỗi bước thoại mang khóa giọng
+     vk = "<canh>-<dong>" (1-based) khớp gói âm thanh của tập (v3.1). Cảnh rẽ
+     nhánh con được convertScenes gọi lại không có coGiong nên không mang
+     khóa — bộ phát bỏ qua lặng lẽ. */
   var steps = [];
   (scenes || []).forEach(function(c, ci){
     var anhC = (anhCanhKet && ci === (scenes || []).length - 1 && c.loai === "thoai") ? anhCanhKet : c.anh;
     if (c.loai === "thoai") {
-      (c.dong || []).forEach(function(d){ steps.push({ k: "line", nv: d.nv, loi: d.loi, anh: anhC }); });
+      (c.dong || []).forEach(function(d, di){ steps.push({ k: "line", nv: d.nv, loi: d.loi, anh: anhC, vk: coGiong ? (ci + 1) + "-" + (di + 1) : null }); });
     } else if (c.loai === "re-nhanh") {
-      (c.dong || []).forEach(function(d){ steps.push({ k: "line", nv: d.nv, loi: d.loi, anh: c.anh }); });
+      (c.dong || []).forEach(function(d, di){ steps.push({ k: "line", nv: d.nv, loi: d.loi, anh: c.anh, vk: coGiong ? (ci + 1) + "-" + (di + 1) : null }); });
       steps.push({ k: "choice", canh: c, anh: c.anh });
     } else if (c.loai === "thu-thach") {
       steps.push({ k: "chal", canh: c, anh: c.anh });
@@ -2461,12 +2669,15 @@ function startTap(){
   curMuaId = m.id;
   var lop = state.lopHienTai;
   preloadTapImages(m, tap);
+  chuanBiGiong(m, tap); /* v3.1: bảo đảm gói giọng đang được nạp trước khi vào tập */
+  var packAm = khoaGoi(m.mon, m.lop);
   S = {
     tap: tap, muaId: m.id, lop: lop,
+    amKhoa: packAm ? khoaTapAm(packAm, m.id, tap.id) : null, /* khóa gói giọng của tập này (v3.1) */
     mode: setupCtx.mode,
     timer: parseInt($("timer-sel").value, 10) || 0,
     teams: null, turn: 0,
-    queue: convertScenes(tap.canh, (ANH_KET[m.id] || {})[tap.id] || null), qi: -1,
+    queue: convertScenes(tap.canh, (ANH_KET[m.id] || {})[tap.id] || null, true), qi: -1,
     usedIds: {},
     stats: { tong: 0, dung: 0, theoMucDo: { "1": { tong: 0, dung: 0 }, "2": { tong: 0, dung: 0 }, "3": { tong: 0, dung: 0 } }, cauSai: [] },
     challengeIdx: 0,
@@ -2591,6 +2802,7 @@ function advance(){
   runStep(S.queue[S.qi]);
 }
 function runStep(st){
+  dungGiong(); /* bước mới (thoại / rẽ nhánh / thử thách): dừng giọng của dòng trước (v3.1) */
   setSceneImage(st.anh);
   hideStageSet(); hideSigns(); stopTimer();
   /* Nhạc theo BƯỚC CẢNH (v2.4): biến cố → bien-co; tập trùm → hoi-hop; thoại → thế giới/ÊM; rẽ nhánh → thế giới/CĂNG.
@@ -2601,6 +2813,7 @@ function runStep(st){
   else if (st.k === "choice") datTrangThaiNhac(chuDeTheoMon((muaById(S.muaId) || {}).mon), "cang", S.muaId);
   if (st.k === "line") {
     showDialogue(st.nv, st.loi, [{ label: "Tiếp", fn: advance }]);
+    phatGiong(st.vk); /* dòng thoại vừa hiện: phát đúng giọng của dòng đó (v3.1) */
   } else if (st.k === "choice") {
     runChoice(st);
   } else if (st.k === "chal") {
@@ -2839,7 +3052,7 @@ function proceedAfterAnswer(dung){
 
 /* ================= KẾT THÚC TẬP & TỔNG KẾT ================= */
 function finishTap(){
-  stopTimer(); hideStageSet(); hideSigns();
+  stopTimer(); dungGiong(); hideStageSet(); hideSigns();
   var tap = S.tap, st = S.stats;
   var pct = st.tong ? st.dung / st.tong : 0;
   var sao = 1; if (pct >= 0.9) sao = 3; else if (pct >= 0.7) sao = 2;
@@ -3082,6 +3295,7 @@ function finAdvance(){
   finRunStep(FIN.steps[FIN.si]);
 }
 function finRunStep(st){
+  dungGiong(); /* Đêm Chung Kết là tập tổng hợp, không có audio: bảo đảm không còn tiếng nào vang (v3.1) */
   hideStageSet(); hideSigns();
   if (st.k === "line") {
     datTrangThaiNhac("chung-ket", "thuong", null);
@@ -3389,6 +3603,7 @@ function openSettings(from){
   $("sw-sound").checked = state.settings.amThanh;
   $("sw-music").checked = state.settings.nhac;
   $("sw-sfx").checked = state.settings.hieuUng;
+  $("sw-voice").checked = giongBat();
   $("set-week-now").textContent = "Tuần hiện tại: tuần " + tuanHienTai() + ".";
   $("btn-wipe-yes").style.display = "none";
   showScreen("scr-settings");
@@ -3398,6 +3613,7 @@ function bindSettings(){
   $("sw-sound").addEventListener("change", function(){ state.settings.amThanh = this.checked; saveState(); refreshMuteIcons(); if (this.checked) capNhatNhacNen(); else stopMusic(); });
   $("sw-music").addEventListener("change", function(){ state.settings.nhac = this.checked; saveState(); if (this.checked) capNhatNhacNen(); else stopMusic(); });
   $("sw-sfx").addEventListener("change", function(){ state.settings.hieuUng = this.checked; saveState(); });
+  $("sw-voice").addEventListener("change", function(){ datGiongNhanVat(this.checked); toast(this.checked ? "Đã bật giọng nhân vật." : "Đã tắt giọng nhân vật — lớp phân vai đọc thoại như trước."); });
   $("btn-export-progress").addEventListener("click", function(){
     downloadJSON({ loai: "tien-trinh-007", phienBan: PHIEN_BAN, xuatLuc: new Date().toISOString(), duLieu: state }, "tien-trinh-truyen-tri-thuc-007.json");
     toast("Đã xuất tệp tiến trình.");
@@ -3411,7 +3627,9 @@ function bindSettings(){
         var obj = JSON.parse(rd.result);
         var d = obj.duLieu || obj;
         if (!d || !d.classes || !d.settings) throw new Error("bad");
-        state = d; saveState();
+        state = d;
+        if (state.settings && typeof state.settings.giongNhanVat !== "boolean") state.settings.giongNhanVat = true;
+        saveState();
         openSettings(settingsFrom); renderLobby(); refreshMuteIcons();
         toast("Đã nhập tệp tiến trình thành công.");
       } catch (e) { toast("Tệp không đúng định dạng tiến trình của 007."); }
@@ -3440,6 +3658,7 @@ function init(){
   setIcon("play-exit", ICON.exit);
   setIcon("splash-frame-ic", ICON.book); setIcon("cover-frame-ic", ICON.book); setIcon("scene-fallback-ic", ICON.book);
   refreshMuteIcons();
+  refreshVoiceUI();
   renderLobby();
   bindSettings();
   document.addEventListener("pointerdown", function(){ audioCtx(); apDungNhac(); });
@@ -3474,6 +3693,10 @@ function init(){
   ["lb-mute","ss-mute","map-mute","setup-mute","play-mute","sum-mute","album-mute","set-mute"].forEach(function(id){
     var b = $(id); if (b) b.addEventListener("click", toggleMute);
   });
+  $("play-voice").addEventListener("click", function(){
+    datGiongNhanVat(!giongBat());
+    toast(giongBat() ? "Đã bật giọng nhân vật." : "Đã tắt giọng nhân vật — lớp phân vai đọc thoại như trước.");
+  });
   $("lb-settings").addEventListener("click", function(){ openSettings("scr-lobby"); });
   $("ss-settings").addEventListener("click", function(){ openSettings("scr-seasons"); });
   $("map-settings").addEventListener("click", function(){ openSettings("scr-map"); });
@@ -3491,7 +3714,7 @@ function init(){
   $("play-exit").addEventListener("click", function(){
     if (FIN) {
       /* Đang trong Đêm Chung Kết: dừng đêm, dọn sân khấu rồi về Sảnh thư viện */
-      FIN = null; stopMusic();
+      FIN = null; dungGiong(); stopMusic();
       $("hp-wrap").classList.remove("show");
       $("scr-play").classList.remove("chu-to");
       var fogX = $("fog-layer"); fogX.className = "fog-layer"; fogX.style.opacity = "";
@@ -3499,7 +3722,7 @@ function init(){
       renderLobby(); showScreen("scr-lobby");
       return;
     }
-    stopTimer(); S = null; stopMusic();
+    stopTimer(); dungGiong(); S = null; stopMusic();
     renderMap(); showScreen("scr-map");
   });
   $("btn-export-session").addEventListener("click", function(){
