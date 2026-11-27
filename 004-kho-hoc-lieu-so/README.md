@@ -6,15 +6,15 @@ Nền tảng **kho học liệu số đa môn cho giáo viên tiểu học** t�
 
 ## Dữ liệu hiện có (bản phát hành 27/11/2026)
 
-Tổng kho: **1.034 bài — 11.094 câu hỏi** ở đủ 7 môn:
+Tổng kho: **1.044 bài — 11.184 câu hỏi** ở đủ 7 môn:
 
 | Môn | Khối có dữ liệu | Số câu |
 |-----|------------------|--------|
-| Toán | Lớp 1, 2, 3, 4, 5 | 3.095 |
+| Toán | Lớp 1, 2, 3, 4, 5 | 3.158 |
 | Tiếng Việt | Lớp 1, 2, 3, 4, 5 | 2.428 |
-| Tiếng Anh | Lớp 3, 4, 5 | 2.370 |
+| Tiếng Anh | Lớp 3, 4, 5 | 2.379 |
 | Tin học | Lớp 3, 4, 5 | 1.125 |
-| Công nghệ | Lớp 3, 4, 5 | 521 |
+| Công nghệ | Lớp 3, 4, 5 | 539 |
 | Khoa học | Lớp 4, 5 | 780 |
 | Lịch sử & Địa lí | Lớp 4, 5 | 775 |
 
@@ -22,6 +22,7 @@ Mỗi câu hỏi có mức độ theo Thông tư 27 (Nhận biết / Kết nối
 
 ## Chức năng
 
+- **27/11/2026 — v1.4.0:** căn tuần KHỐI 3 theo Kế hoạch môn học 2026–2027 của trường — đợt khép kín căn KHMH cả 3 khối: 25 bài/mục đổi tuần ở Toán, Công nghệ và Tiếng Anh học kì I (giữ nguyên 100% mã và nội dung câu hỏi), bổ sung 10 mục mới (90 câu) gồm 4 bài Luyện tập chung/Ôn tập Toán (Bài 22, 35, 69, 80), 3 mục đánh giá Toán, 2 mục Ôn tập/Kiểm tra Công nghệ và Kiểm tra Học kì 1 Tiếng Anh; điền đủ lời giải thích cho 13 câu Tiếng Anh còn thiếu. Tiếng Việt khối 3 đã khớp sẵn 66/66 nên giữ nguyên. Khối 3 đạt 188 mục / 2.632 câu; tổng kho 7 môn / 1.044 bài / 11.184 câu.
 - **27/11/2026 — v1.3.9:** căn tuần và tên bài KHỐI 5 theo Kế hoạch môn học 2026–2027 của trường: 145 bài đổi tuần (giữ nguyên 100% mã và nội dung câu hỏi), sửa 2 tên bài theo SGK (Tiếng Việt "Đàn t’rưng – tiếng ca đại ngàn", LS&ĐL Bài 19 "Nước Cộng hoà Dân chủ Nhân dân Lào"), bổ sung 19 mục Ôn tập/Kiểm tra mới (171 câu) — khối 5 đạt 248 mục / 2.903 câu; tổng kho 7 môn / 1.034 bài / 11.094 câu.
 
 - **17/11/2026 — v1.3.6:** tên trường ở màn hình mở đầu đổi sang font Baloo 2 (nhúng trong tệp, chạy offline), giữ màu xanh navy đậm.
