@@ -118,3 +118,9 @@ Game nhập vai kể chuyện theo chương trình Tin học lớp 3–5 (sách 
 
 - Căn tuần các bài khối 5 theo Kế hoạch môn học 2026–2027: 6 gói khối 5 trên Drive (Toán, Tiếng Việt, Tiếng Anh, Khoa học, Công nghệ, Lịch sử & Địa lí) đã vá 336 trường tuần tại chỗ, giữ nguyên fileId; đổi tem đệm dữ liệu PB_DULIEU "v3.0" → "v3.1.2" để mọi thiết bị tự xin lại gói mới (máy đã đệm gói cũ dưới tem v3.0 sẽ không tự nhận bản vá nếu không tăng tem).
 - Ghi chú "Cập nhật" trong Thông tin chỉ còn của v3.1.2 theo thông lệ. Giữ nguyên: khóa dữ liệu ttt007_v1, cổng mã truy cập, lồng tiếng + đệm audio ttt007-dem-am-v2, nhạc nền và hiệu ứng, nội dung truyện và câu hỏi. Qua đủ 2 cửa logo (grep assets/ = 0; data URI logo 126.620 ký tự, RIFF/WEBP). Vỏ 638.139 byte.
+
+## v3.1.3 (27/11/2026) — Cập nhật tuần khối 3 theo KHMH + ép làm mới đệm dữ liệu lần hai
+
+- Căn tuần các bài khối 3 theo Kế hoạch môn học 2026–2027: 3 gói khối 3 trên Drive (Toán, Tiếng Anh, Công nghệ) đã vá 60 trường tuần tại chỗ, giữ nguyên fileId, đối chiếu md5 khớp bản vá ở máy; Tiếng Việt khối 3 khớp sẵn nên không vá. Đợt này khép kín việc căn KHMH cho cả ba khối 3–4–5.
+- Đổi tem đệm dữ liệu PB_DULIEU "v3.1.2" → "v3.1.3" để mọi thiết bị tự xin lại gói khối 3 mới; hằng số PHIEN_BAN, ghi chú "Cập nhật" và nhãn tĩnh "Phiên bản" trong Cài đặt & Thông tin cập nhật nhất quán sang v3.1.3 trong một lần đẩy (rút kinh nghiệm đợt v3.1.2 sót nhãn tĩnh phải đẩy bổ sung).
+- Giữ nguyên: khóa dữ liệu ttt007_v1, cổng mã truy cập, lồng tiếng + đệm audio ttt007-dem-am-v2, nhạc nền và hiệu ứng, nội dung truyện và câu hỏi. Qua đủ 2 cửa logo (grep assets/ = 0; data URI logo 126.620 ký tự, RIFF/WEBP). Vỏ 638.216 byte.
