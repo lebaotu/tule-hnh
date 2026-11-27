@@ -333,7 +333,7 @@ input,select,textarea{font-family:inherit;}
 /* ---------- Settings ---------- */
 .set-row{display:flex; align-items:center; gap:12px; padding:13px 0; border-bottom:1.5px solid var(--line);}
 .set-row:last-child{border-bottom:none;}
-.set-row .sr-txt{flex:1;}
+.set-row .sr-txt{flex:1; min-width:0;}
 .set-row .sr-t{font-weight:700; color:var(--ink); font-size:16px;}
 .set-row .sr-d{font-size:13.5px; color:var(--muted); margin-top:2px; line-height:1.45;}
 .switch{position:relative; width:58px; height:34px; flex-shrink:0; display:inline-block;}
@@ -345,6 +345,30 @@ input,select,textarea{font-family:inherit;}
 .switch input:focus-visible + .tr{outline:2px solid var(--gold); outline-offset:2px;}
 .info-list{font-size:15px; line-height:1.65;}
 .info-list b{color:var(--ink);}
+
+/* ---------- Thanh trượt tốc độ giọng (v3.1.6) ---------- */
+.tocdo-ctrl{flex:1; min-width:0;}
+.tocdo-valrow{display:flex; justify-content:flex-end; margin-bottom:2px;}
+.tocdo-val{display:inline-block; border:2px solid var(--line); background:var(--surface2); color:var(--ink); border-radius:10px; padding:5px 12px; font-weight:700; font-size:15px; min-width:158px; text-align:center;}
+.tocdo-sliderrow{display:flex; align-items:center; gap:10px;}
+.tocdo-end{font-size:13px; color:var(--muted); font-weight:600; flex-shrink:0;}
+.tocdo-track{flex:1; min-width:0;}
+input.tocdo-range{-webkit-appearance:none; appearance:none; width:100%; height:44px; background:transparent; margin:0; padding:0; cursor:pointer; display:block;}
+input.tocdo-range::-webkit-slider-runnable-track{height:6px; border-radius:999px; background:var(--line);}
+input.tocdo-range::-webkit-slider-thumb{-webkit-appearance:none; width:28px; height:28px; margin-top:-11px; border-radius:50%; background:var(--gold); border:3px solid var(--surface); box-shadow:0 1px 4px rgba(0,0,0,.35);}
+input.tocdo-range::-moz-range-track{height:6px; border-radius:999px; background:var(--line);}
+input.tocdo-range::-moz-range-thumb{width:22px; height:22px; border-radius:50%; background:var(--gold); border:3px solid var(--surface); box-shadow:0 1px 4px rgba(0,0,0,.35);}
+input.tocdo-range:focus-visible{outline:2px solid var(--gold); outline-offset:2px; border-radius:8px;}
+.tocdo-ticks{display:flex; justify-content:space-between; padding:0 14px; margin-top:-5px; pointer-events:none;}
+.tocdo-ticks span{width:2px; height:8px; background:var(--muted); border-radius:2px; opacity:.65;}
+.tocdo-ticks span.mid{width:3px; height:13px; background:var(--ink); opacity:1;}
+
+/* ---------- Màn hẹp (≤480px): hàng Cài đặt xếp chồng dọc (v3.1.6) ---------- */
+@media (max-width:480px){
+  .set-row{flex-direction:column; align-items:stretch; gap:8px;}
+  .set-row .sr-txt{flex:none; width:100%;}
+  .set-row > .switch{align-self:flex-start;}
+}
 
 /* ---------- Toast & confetti ---------- */
 .toast{position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(20px); background:var(--ink); color:var(--bg); padding:12px 20px; border-radius:999px; font-weight:500; font-size:15px; opacity:0; pointer-events:none; transition:all .25s; z-index:99; max-width:92vw; text-align:center;}
@@ -702,11 +726,17 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
         <label class="switch"><input type="checkbox" id="sw-voice" aria-label="Giọng nhân vật"><span class="tr"></span></label>
       </div>
       <div class="set-row">
-        <div class="sr-txt"><div class="sr-t">Tốc độ giọng</div><div class="sr-d">Giọng đọc sẵn nghe hơi nhanh thì thầy chọn mức chậm hơn — tiếng chậm lại nhưng vẫn giữ nguyên cao độ nên vẫn tự nhiên. Chỉ áp dụng cho giọng nhân vật; nhạc nền và hiệu ứng không đổi.</div></div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
-          <button type="button" class="chip" data-tocdo="0.8">Chậm rãi</button>
-          <button type="button" class="chip" data-tocdo="0.9">Hơi chậm</button>
-          <button type="button" class="chip" data-tocdo="1">Như bản gốc</button>
+        <div class="sr-txt"><div class="sr-t">Tốc độ giọng</div></div>
+        <div class="tocdo-ctrl">
+          <div class="tocdo-valrow"><span class="tocdo-val" id="tocdo-val">−2 · Chậm rãi</span></div>
+          <div class="tocdo-sliderrow">
+            <span class="tocdo-end">Chậm</span>
+            <div class="tocdo-track">
+              <input type="range" class="tocdo-range" id="tocdo-range" min="-2" max="2" step="1" value="-2" aria-label="Tốc độ giọng">
+              <div class="tocdo-ticks" aria-hidden="true"><span></span><span></span><span class="mid"></span><span></span><span></span></div>
+            </div>
+            <span class="tocdo-end">Nhanh</span>
+          </div>
         </div>
       </div>
     </div>
@@ -731,8 +761,8 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
         <p><b>Dữ liệu truyện:</b> Thư viện Ánh Sao gồm các thế giới truyện của 7 môn học, 315 mùa truyện và 1.330 tập truyện, cùng các tập đấu trùm ở cuối mỗi chủ đề và sự kiện Đêm Chung Kết. Mỗi mùa truyện bám theo một chủ đề, mỗi tập truyện bám theo một bài học trong sách giáo khoa, để học sinh vừa phiêu lưu cùng Biệt đội Ánh Sao vừa ôn luyện đúng kiến thức của bài. Cốt truyện, lời thoại và thử thách được soạn riêng cho từng bài; câu hỏi trong thử thách được rút từ ngân hàng câu hỏi của đúng bài học đó.</p>
         <p><b>Ảnh minh họa:</b> ảnh được nạp từ thư mục “anh” đặt cạnh tệp của sản phẩm; mở tập nào app mới nạp ảnh của tập đó. Khi thư mục ảnh chưa có (ví dụ mở bản xem trước), truyện vẫn chơi trọn vẹn với nền cảnh dự phòng.</p>
         <p><b>Sự kiện Đêm Chung Kết:</b> ở Sảnh thư viện, mọi lớp đều dự được (không khóa tuần, không cần hoàn thành mùa nào trước). Cả lớp lần lượt thắp sáng các Cổng Thế Giới của khối lớp mình — mỗi cổng 2 đòn tri thức mức Kết nối/Vận dụng rút từ chính thế giới đó, trả lời sai có câu cứu viện mức Nhận biết của nhân vật dẫn đường — rồi đối mặt trùm cuối Sương Mù Quên Lãng với 6 đòn tổng hợp. Hoàn thành đêm, lớp nhận Huy Hiệu Ánh Sao trong Album hành trình.</p>
-        <p><b>Cập nhật:</b> v3.1.5 — Tiếng về kịp lúc mở tập: app đánh thức dịch vụ dữ liệu ngay khi mở khóa, nạp trước gói tiếng từ màn hình mùa và kiên trì xin lại cho tới khi tiếng sẵn sàng; dòng thoại xin riêng được lưu vào bộ nhớ đệm của máy. Thêm chọn tốc độ giọng nhân vật trong Cài đặt (Chậm rãi / Hơi chậm / Như bản gốc, mặc định Chậm rãi).</p>
-        <p><b>Phiên bản:</b> v3.1.5 — xây trên bản chính thức v2.0 Đêm Chung Kết (Final Release), bản chính thức đầu tiên của sản phẩm. Thư viện Ánh Sao đã đủ trọn 6 thế giới với 315 mùa truyện, 1.330 tập, và mở thêm sự kiện đặc biệt Đêm Chung Kết — trận quyết chiến cuối cùng với Sương Mù Quên Lãng dành cho mọi lớp.</p>
+        <p><b>Cập nhật:</b> v3.1.6 — Tốc độ giọng trong Cài đặt chuyển thành thanh trượt 5 nấc: mốc 0 ở giữa là tốc độ gốc, kéo sang trái chậm hơn (−1, −2), kéo sang phải nhanh hơn (+1, +2) — kéo tới đâu giọng đổi ngay tới đó. Sửa vỡ bố cục màn Cài đặt trên điện thoại: trên màn hình hẹp, các hàng cài đặt xếp chồng gọn gàng, nhãn và phần điều khiển không còn bóp nhau nữa.</p>
+        <p><b>Phiên bản:</b> v3.1.6 — xây trên bản chính thức v2.0 Đêm Chung Kết (Final Release), bản chính thức đầu tiên của sản phẩm. Thư viện Ánh Sao đã đủ trọn 6 thế giới với 315 mùa truyện, 1.330 tập, và mở thêm sự kiện đặc biệt Đêm Chung Kết — trận quyết chiến cuối cùng với Sương Mù Quên Lãng dành cho mọi lớp.</p>
       </div>
     </div>
   </div>
@@ -898,7 +928,7 @@ var CAU_TIENG_ANH_THEO_LOP = {};
 var CAU_KHOA_HOC_THEO_LOP = {};
 var CAU_CONG_NGHE_THEO_LOP = {};
 var CAU_LICH_SU_DIA_LI_THEO_LOP = {};
-var PHIEN_BAN = "v3.1.5";
+var PHIEN_BAN = "v3.1.6";
 var DICH_VU_DL_URL = "https://script.google.com/macros/s/AKfycbyzLjsUUtfUBXK3LZXBNtQfy36dX0EMtXVBQspmpRipNAE3QSI8yopI0zzS8EFMiS0gcw/exec";
 var PB_DULIEU = "v3.1.3";
 var NHAN_VAT_TO = ["Minh Anh", "Tuấn Kiệt", "Thảo Nguyên", "Đức Trí", "Thủ thư Số", "Người đọc dũng cảm"];
@@ -1402,37 +1432,66 @@ var amDongDangBay = {};/* "<khoaTap>|<khóa dòng>" -> true khi fetch lẻ của
 var amLuotPhat = 0;    /* đếm lượt phát/dòng hiện tại: tăng mỗi lần phatGiong/dungGiong — v3.1.4 */
 var amHenThuLai = {};  /* khoaTap -> id vòng hẹn giờ thử lại ~10 giây/lần khi tập đang mở mà gói chưa sẵn sàng — v3.1.5 */
 function giongBat(){ return !!(state && state.settings && state.settings.giongNhanVat); }
-/* Tốc độ giọng nhân vật (v3.1.5): 0.8 "Chậm rãi" / 0.9 "Hơi chậm" / 1.0
-   "Như bản gốc"; dữ liệu cài đặt cũ chưa có trường tocDoGiong thì hiểu
-   là 0.8. Chỉ áp cho giọng nhân vật — nhạc nền và hiệu ứng (WebAudio)
-   không đụng; áp cho cả chế độ offline file: vì dùng chung một phần tử
+/* Tốc độ giọng nhân vật (v3.1.6): thanh trượt 5 NẤC nguyên −2..2, mốc 0
+   ở giữa là tốc độ gốc. Ánh xạ nấc → playbackRate: −2 → 0.8 "Chậm rãi",
+   −1 → 0.9 "Hơi chậm", 0 → 1.0 "Như bản gốc", +1 → 1.1 "Hơi nhanh",
+   +2 → 1.25 "Nhanh". settings.tocDoGiong từ nay lưu SỐ NẤC; cờ
+   settings.tocDoGiongLaNac = true phân biệt với cách lưu cũ của v3.1.5
+   (lưu thẳng tốc độ 0.8 / 0.9 / 1 — trong đó 1.0 trùng với nấc +1).
+   Chỉ áp cho giọng nhân vật — nhạc nền và hiệu ứng (WebAudio) không
+   đụng; áp cho cả chế độ offline file: vì dùng chung một phần tử
    audio (amAudio). */
+var TOCDO_TEN = { "-2": "Chậm rãi", "-1": "Hơi chậm", "0": "Như bản gốc", "1": "Hơi nhanh", "2": "Nhanh" };
+var TOCDO_RATE = { "-2": 0.8, "-1": 0.9, "0": 1, "1": 1.1, "2": 1.25 };
+function tenNacTocDo(n){ return TOCDO_TEN[String(n)] || "Chậm rãi"; }
+function nhanNacTocDo(n){
+  var dau = n < 0 ? "\u2212" + Math.abs(n) : (n > 0 ? "+" + n : "0");
+  return dau + " · " + tenNacTocDo(n);
+}
+/* Di trú một lần từ cách lưu cũ (tốc độ) sang số nấc + kẹp giá trị lạ. */
+function chuanHoaTocDoGiong(s){
+  if (!s) return;
+  if (s.tocDoGiongLaNac === true) {
+    var n = Math.round(Number(s.tocDoGiong));
+    s.tocDoGiong = (n >= -2 && n <= 2) ? n : -2;
+  } else {
+    var v = s.tocDoGiong;
+    s.tocDoGiong = (v === 0.9) ? -1 : ((v === 1) ? 0 : -2);
+    s.tocDoGiongLaNac = true;
+  }
+}
 function tocDoGiongHT(){
-  var v = state && state.settings ? state.settings.tocDoGiong : undefined;
-  return (v === 0.9 || v === 1) ? v : 0.8;
+  var s = state && state.settings ? state.settings : null;
+  if (!s) return -2;
+  if (s.tocDoGiongLaNac !== true) chuanHoaTocDoGiong(s);
+  var n = Math.round(Number(s.tocDoGiong));
+  return (n >= -2 && n <= 2) ? n : -2;
 }
 function apTocDoGiong(){
   if (!amAudio) return;
   try {
-    amAudio.playbackRate = tocDoGiongHT();
+    amAudio.playbackRate = TOCDO_RATE[String(tocDoGiongHT())];
     amAudio.preservesPitch = true;
     amAudio.mozPreservesPitch = true;
     amAudio.webkitPreservesPitch = true;
   } catch (e) {}
 }
-function datTocDoGiong(v){
+function datTocDoGiong(nac){
   if (!state || !state.settings) return;
-  state.settings.tocDoGiong = (v === 0.9 || v === 1) ? v : 0.8;
+  var n = Math.round(Number(nac));
+  if (!(n >= -2 && n <= 2)) n = -2;
+  state.settings.tocDoGiong = n;
+  state.settings.tocDoGiongLaNac = true;
   saveState();
   apTocDoGiong(); /* đổi giữa chừng: áp ngay lên phần tử audio đang sống */
   refreshTocDoUI();
 }
 function refreshTocDoUI(){
-  var v = tocDoGiongHT();
-  var btns = document.querySelectorAll("[data-tocdo]");
-  for (var i = 0; i < btns.length; i++) {
-    btns[i].classList.toggle("sel", parseFloat(btns[i].getAttribute("data-tocdo")) === v);
-  }
+  var n = tocDoGiongHT();
+  var rg = document.getElementById("tocdo-range");
+  if (rg && String(rg.value) !== String(n)) rg.value = n;
+  var o = document.getElementById("tocdo-val");
+  if (o) o.textContent = nhanNacTocDo(n);
 }
 /* v3.1.5: vòng thử lại liên tục ~10 giây/lần cho gói tiếng của tập ĐANG MỞ
    (đang ở màn thiết lập của tập hoặc đang chơi tập): gói chưa sẵn sàng thì
@@ -1786,7 +1845,7 @@ var LS_KEY = "ttt007_v1";
 var state = null;
 function defaultState(){
   return {
-    settings: { khoaTuan: true, amThanh: true, nhac: true, hieuUng: true, giongNhanVat: true, tocDoGiong: 0.8 },
+    settings: { khoaTuan: true, amThanh: true, nhac: true, hieuUng: true, giongNhanVat: true, tocDoGiong: -2, tocDoGiongLaNac: true },
     lopHienTai: "",
     muaChon: "",
     classes: {}
@@ -1800,8 +1859,8 @@ function loadState(){
   } catch (e) { state = defaultState(); }
   /* Tiến trình lưu từ bản trước v3.1 chưa có khóa giọng nhân vật: mặc định BẬT */
   if (state.settings && typeof state.settings.giongNhanVat !== "boolean") state.settings.giongNhanVat = true;
-  /* Cài đặt lưu từ bản trước v3.1.5 chưa có tốc độ giọng: mặc định 0.8 "Chậm rãi" */
-  if (state.settings && [0.8, 0.9, 1].indexOf(state.settings.tocDoGiong) < 0) state.settings.tocDoGiong = 0.8;
+  /* Di trú tốc độ giọng (v3.1.6): bản cũ lưu tốc độ 0.8/0.9/1 → đổi sang số nấc −2/−1/0 */
+  if (state.settings) chuanHoaTocDoGiong(state.settings);
 }
 function saveState(){
   try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
@@ -3874,12 +3933,11 @@ function bindSettings(){
   $("sw-music").addEventListener("change", function(){ state.settings.nhac = this.checked; saveState(); if (this.checked) capNhatNhacNen(); else stopMusic(); });
   $("sw-sfx").addEventListener("change", function(){ state.settings.hieuUng = this.checked; saveState(); });
   $("sw-voice").addEventListener("change", function(){ datGiongNhanVat(this.checked); toast(this.checked ? "Đã bật giọng nhân vật." : "Đã tắt giọng nhân vật — lớp phân vai đọc thoại như trước."); });
-  document.querySelectorAll("[data-tocdo]").forEach(function(b){
-    b.addEventListener("click", function(){
-      datTocDoGiong(parseFloat(b.getAttribute("data-tocdo")));
-      toast("Tốc độ giọng nhân vật: " + b.textContent + ".");
-    });
-  });
+  var tocdoRange = $("tocdo-range");
+  if (tocdoRange) {
+    tocdoRange.addEventListener("input", function(){ datTocDoGiong(parseInt(this.value, 10)); });
+    tocdoRange.addEventListener("change", function(){ toast("Tốc độ giọng nhân vật: " + tenNacTocDo(tocDoGiongHT()) + "."); });
+  }
   $("btn-export-progress").addEventListener("click", function(){
     downloadJSON({ loai: "tien-trinh-007", phienBan: PHIEN_BAN, xuatLuc: new Date().toISOString(), duLieu: state }, "tien-trinh-truyen-tri-thuc-007.json");
     toast("Đã xuất tệp tiến trình.");
@@ -3895,7 +3953,7 @@ function bindSettings(){
         if (!d || !d.classes || !d.settings) throw new Error("bad");
         state = d;
         if (state.settings && typeof state.settings.giongNhanVat !== "boolean") state.settings.giongNhanVat = true;
-        if (state.settings && [0.8, 0.9, 1].indexOf(state.settings.tocDoGiong) < 0) state.settings.tocDoGiong = 0.8;
+        if (state.settings) chuanHoaTocDoGiong(state.settings);
         saveState();
         openSettings(settingsFrom); renderLobby(); refreshMuteIcons();
         toast("Đã nhập tệp tiến trình thành công.");
