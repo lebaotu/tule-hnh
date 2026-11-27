@@ -113,3 +113,8 @@ Game nhập vai kể chuyện theo chương trình Tin học lớp 3–5 (sách 
 - Bổ sung phát tiếng cho thoại trong đoạn rẽ nhánh, cảnh biến cố khi trả lời sai và lời dẫn vào thử thách (trước đây ba vùng này chỉ hiện chữ).
 - Thu bổ sung 9.466 dòng tiếng cho đủ 19.964 dòng toàn thư viện; bộ đệm âm thanh trên máy đổi sang kho mới để nạp lại trọn gói.
 - Giữ nguyên: khóa dữ liệu, gói dữ liệu v3.0, mã truy cập, nhạc nền và hiệu ứng.
+
+## v3.1.2 (27/11/2026) — Cập nhật tuần khối 5 theo KHMH + ép làm mới đệm dữ liệu
+
+- Căn tuần các bài khối 5 theo Kế hoạch môn học 2026–2027: 6 gói khối 5 trên Drive (Toán, Tiếng Việt, Tiếng Anh, Khoa học, Công nghệ, Lịch sử & Địa lí) đã vá 336 trường tuần tại chỗ, giữ nguyên fileId; đổi tem đệm dữ liệu PB_DULIEU "v3.0" → "v3.1.2" để mọi thiết bị tự xin lại gói mới (máy đã đệm gói cũ dưới tem v3.0 sẽ không tự nhận bản vá nếu không tăng tem).
+- Ghi chú "Cập nhật" trong Thông tin chỉ còn của v3.1.2 theo thông lệ. Giữ nguyên: khóa dữ liệu ttt007_v1, cổng mã truy cập, lồng tiếng + đệm audio ttt007-dem-am-v2, nhạc nền và hiệu ứng, nội dung truyện và câu hỏi. Qua đủ 2 cửa logo (grep assets/ = 0; data URI logo 126.620 ký tự, RIFF/WEBP). Vỏ 638.139 byte.
