@@ -45,6 +45,9 @@ input,select,textarea{font-family:inherit;}
 .icon-btn svg{width:22px; height:22px;}
 .icon-btn:active{transform:translateY(1px);}
 .icon-btn.off{opacity:.45;}
+.icon-btn-lbl{width:auto; min-width:44px; padding:0 10px; gap:6px;}
+.icon-btn-lbl svg{width:19px; height:19px;}
+.set-lbl{font-size:12.5px; font-weight:700; line-height:1; white-space:nowrap;}
 .wrap{max-width:1060px; margin:0 auto; padding:16px 14px 40px;}
 
 /* ---------- Buttons ---------- */
@@ -441,7 +444,7 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
     <button class="icon-btn" id="lb-back" type="button" aria-label="Về màn hình mở đầu"></button>
     <div class="tb-title">Sảnh Thư viện Ánh Sao</div>
     <button class="icon-btn" id="lb-mute" type="button" aria-label="Bật / tắt âm thanh"></button>
-    <button class="icon-btn" id="lb-settings" type="button" aria-label="Cài đặt và thông tin"></button>
+    <button class="icon-btn icon-btn-lbl" id="lb-settings" type="button" aria-label="Cài đặt và thông tin"></button>
   </div>
   <div class="wrap">
     <h2 class="sec-title">Bảy cuốn sách — bảy thế giới</h2>
@@ -472,7 +475,7 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
     <button class="icon-btn" id="ss-back" type="button" aria-label="Về sảnh thư viện"></button>
     <div class="tb-title" id="ss-title">Truyện Tin học — chọn lớp &amp; mùa truyện</div>
     <button class="icon-btn" id="ss-mute" type="button" aria-label="Bật / tắt âm thanh"></button>
-    <button class="icon-btn" id="ss-settings" type="button" aria-label="Cài đặt và thông tin"></button>
+    <button class="icon-btn icon-btn-lbl" id="ss-settings" type="button" aria-label="Cài đặt và thông tin"></button>
   </div>
   <div class="wrap">
     <h2 class="sec-title" id="seasons-h2">Cuốn sách Tin học — ba chặng đường</h2>
@@ -489,7 +492,7 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
     <button class="icon-btn" id="map-back" type="button" aria-label="Về danh sách mùa truyện"></button>
     <div class="tb-title" id="map-title">Bản đồ mùa truyện</div>
     <button class="icon-btn" id="map-mute" type="button" aria-label="Bật / tắt âm thanh"></button>
-    <button class="icon-btn" id="map-settings" type="button" aria-label="Cài đặt và thông tin"></button>
+    <button class="icon-btn icon-btn-lbl" id="map-settings" type="button" aria-label="Cài đặt và thông tin"></button>
   </div>
   <div class="wrap">
     <div class="mua-head">
@@ -698,6 +701,14 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
         <div class="sr-txt"><div class="sr-t">Giọng nhân vật</div><div class="sr-d">Toàn bộ thoại truyện được lồng tiếng riêng cho từng nhân vật — dòng thoại nào hiện ra, giọng của nhân vật đó vang lên. Tắt mục này thì lớp phân vai đọc thoại như trước; nhạc nền và hiệu ứng không đổi. Trên màn hình chơi cũng có nút giọng để bật / tắt nhanh.</div></div>
         <label class="switch"><input type="checkbox" id="sw-voice" aria-label="Giọng nhân vật"><span class="tr"></span></label>
       </div>
+      <div class="set-row">
+        <div class="sr-txt"><div class="sr-t">Tốc độ giọng</div><div class="sr-d">Giọng đọc sẵn nghe hơi nhanh thì thầy chọn mức chậm hơn — tiếng chậm lại nhưng vẫn giữ nguyên cao độ nên vẫn tự nhiên. Chỉ áp dụng cho giọng nhân vật; nhạc nền và hiệu ứng không đổi.</div></div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
+          <button type="button" class="chip" data-tocdo="0.8">Chậm rãi</button>
+          <button type="button" class="chip" data-tocdo="0.9">Hơi chậm</button>
+          <button type="button" class="chip" data-tocdo="1">Như bản gốc</button>
+        </div>
+      </div>
     </div>
     <div class="panel">
       <h3>Tiến trình các lớp</h3>
@@ -720,8 +731,8 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
         <p><b>Dữ liệu truyện:</b> Thư viện Ánh Sao gồm các thế giới truyện của 7 môn học, 315 mùa truyện và 1.330 tập truyện, cùng các tập đấu trùm ở cuối mỗi chủ đề và sự kiện Đêm Chung Kết. Mỗi mùa truyện bám theo một chủ đề, mỗi tập truyện bám theo một bài học trong sách giáo khoa, để học sinh vừa phiêu lưu cùng Biệt đội Ánh Sao vừa ôn luyện đúng kiến thức của bài. Cốt truyện, lời thoại và thử thách được soạn riêng cho từng bài; câu hỏi trong thử thách được rút từ ngân hàng câu hỏi của đúng bài học đó.</p>
         <p><b>Ảnh minh họa:</b> ảnh được nạp từ thư mục “anh” đặt cạnh tệp của sản phẩm; mở tập nào app mới nạp ảnh của tập đó. Khi thư mục ảnh chưa có (ví dụ mở bản xem trước), truyện vẫn chơi trọn vẹn với nền cảnh dự phòng.</p>
         <p><b>Sự kiện Đêm Chung Kết:</b> ở Sảnh thư viện, mọi lớp đều dự được (không khóa tuần, không cần hoàn thành mùa nào trước). Cả lớp lần lượt thắp sáng các Cổng Thế Giới của khối lớp mình — mỗi cổng 2 đòn tri thức mức Kết nối/Vận dụng rút từ chính thế giới đó, trả lời sai có câu cứu viện mức Nhận biết của nhân vật dẫn đường — rồi đối mặt trùm cuối Sương Mù Quên Lãng với 6 đòn tổng hợp. Hoàn thành đêm, lớp nhận Huy Hiệu Ánh Sao trong Album hành trình.</p>
-        <p><b>Cập nhật:</b> v3.1.4 — Sửa tiếng nói nhân vật: bản offline (USB) nay phát tiếng trực tiếp từ thư mục audio đặt cạnh app, không còn bị trình duyệt chặn; bản mạng tự nạp lại khi mạng chập chờn và xin riêng từng dòng thoại, nên vào tập là có tiếng, không cần tải lại trang.</p>
-        <p><b>Phiên bản:</b> v3.1.4 — xây trên bản chính thức v2.0 Đêm Chung Kết (Final Release), bản chính thức đầu tiên của sản phẩm. Thư viện Ánh Sao đã đủ trọn 6 thế giới với 315 mùa truyện, 1.330 tập, và mở thêm sự kiện đặc biệt Đêm Chung Kết — trận quyết chiến cuối cùng với Sương Mù Quên Lãng dành cho mọi lớp.</p>
+        <p><b>Cập nhật:</b> v3.1.5 — Tiếng về kịp lúc mở tập: app đánh thức dịch vụ dữ liệu ngay khi mở khóa, nạp trước gói tiếng từ màn hình mùa và kiên trì xin lại cho tới khi tiếng sẵn sàng; dòng thoại xin riêng được lưu vào bộ nhớ đệm của máy. Thêm chọn tốc độ giọng nhân vật trong Cài đặt (Chậm rãi / Hơi chậm / Như bản gốc, mặc định Chậm rãi).</p>
+        <p><b>Phiên bản:</b> v3.1.5 — xây trên bản chính thức v2.0 Đêm Chung Kết (Final Release), bản chính thức đầu tiên của sản phẩm. Thư viện Ánh Sao đã đủ trọn 6 thế giới với 315 mùa truyện, 1.330 tập, và mở thêm sự kiện đặc biệt Đêm Chung Kết — trận quyết chiến cuối cùng với Sương Mù Quên Lãng dành cho mọi lớp.</p>
       </div>
     </div>
   </div>
@@ -887,7 +898,7 @@ var CAU_TIENG_ANH_THEO_LOP = {};
 var CAU_KHOA_HOC_THEO_LOP = {};
 var CAU_CONG_NGHE_THEO_LOP = {};
 var CAU_LICH_SU_DIA_LI_THEO_LOP = {};
-var PHIEN_BAN = "v3.1.4";
+var PHIEN_BAN = "v3.1.5";
 var DICH_VU_DL_URL = "https://script.google.com/macros/s/AKfycbyzLjsUUtfUBXK3LZXBNtQfy36dX0EMtXVBQspmpRipNAE3QSI8yopI0zzS8EFMiS0gcw/exec";
 var PB_DULIEU = "v3.1.3";
 var NHAN_VAT_TO = ["Minh Anh", "Tuấn Kiệt", "Thảo Nguyên", "Đức Trí", "Thủ thư Số", "Người đọc dũng cảm"];
@@ -966,12 +977,28 @@ function moBangNhapMa(){
   showScreen("scr-gate");
   setTimeout(function(){ var inp = $("gate-code"); if (inp) inp.focus(); }, 60);
 }
+/* v3.1.5: đánh thức Dịch vụ dữ liệu ngay khi mở khóa thành công. Dịch vụ
+   Apps Script "ngủ" khi lâu không ai gọi, nên lần xin gói tiếng đầu tiên
+   phải chờ nó thức dậy và về trễ hơn các dòng thoại đầu. Bắn đúng 1 request
+   nhẹ mỗi lần mở app (cờ trong bộ nhớ phiên), chỉ ở bản mạng (http:/https:),
+   nuốt mọi lỗi, không chặn và không làm chậm luồng vào Sảnh. */
+var daDanhThucDichVu = false;
+function danhThucDichVu(){
+  if (daDanhThucDichVu) return;
+  if (!window.location || (location.protocol !== "http:" && location.protocol !== "https:")) return;
+  daDanhThucDichVu = true;
+  try {
+    var p = fetch(DICH_VU_DL_URL + "?thuc=1");
+    if (p && p.catch) p.catch(function(){});
+  } catch (e) {}
+}
 function thuMoKhoa(){
   var ma = $("gate-code").value.trim();
   bamSHA256(ma).then(function(h){
     if (h === MA_BAM_TRUY_CAP){
       daMoKhoa = true;
       chiaDuLieu = h;
+      danhThucDichVu(); /* v3.1.5: đánh thức dịch vụ dữ liệu ngay khi mở khóa */
       $("gate-err").textContent = "";
       sfx("page");
       renderLobby(); showScreen("scr-lobby");
@@ -1373,7 +1400,65 @@ var amThuLuc = {};     /* khoaTap -> mốc thời gian (ms) lần bắt đầu n
 var amDaThuLai = {};   /* khoaTap -> true khi lần tự thử lại sau ~6 giây đã dùng — v3.1.4 */
 var amDongDangBay = {};/* "<khoaTap>|<khóa dòng>" -> true khi fetch lẻ của dòng đó đang bay — v3.1.4 */
 var amLuotPhat = 0;    /* đếm lượt phát/dòng hiện tại: tăng mỗi lần phatGiong/dungGiong — v3.1.4 */
+var amHenThuLai = {};  /* khoaTap -> id vòng hẹn giờ thử lại ~10 giây/lần khi tập đang mở mà gói chưa sẵn sàng — v3.1.5 */
 function giongBat(){ return !!(state && state.settings && state.settings.giongNhanVat); }
+/* Tốc độ giọng nhân vật (v3.1.5): 0.8 "Chậm rãi" / 0.9 "Hơi chậm" / 1.0
+   "Như bản gốc"; dữ liệu cài đặt cũ chưa có trường tocDoGiong thì hiểu
+   là 0.8. Chỉ áp cho giọng nhân vật — nhạc nền và hiệu ứng (WebAudio)
+   không đụng; áp cho cả chế độ offline file: vì dùng chung một phần tử
+   audio (amAudio). */
+function tocDoGiongHT(){
+  var v = state && state.settings ? state.settings.tocDoGiong : undefined;
+  return (v === 0.9 || v === 1) ? v : 0.8;
+}
+function apTocDoGiong(){
+  if (!amAudio) return;
+  try {
+    amAudio.playbackRate = tocDoGiongHT();
+    amAudio.preservesPitch = true;
+    amAudio.mozPreservesPitch = true;
+    amAudio.webkitPreservesPitch = true;
+  } catch (e) {}
+}
+function datTocDoGiong(v){
+  if (!state || !state.settings) return;
+  state.settings.tocDoGiong = (v === 0.9 || v === 1) ? v : 0.8;
+  saveState();
+  apTocDoGiong(); /* đổi giữa chừng: áp ngay lên phần tử audio đang sống */
+  refreshTocDoUI();
+}
+function refreshTocDoUI(){
+  var v = tocDoGiongHT();
+  var btns = document.querySelectorAll("[data-tocdo]");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].classList.toggle("sel", parseFloat(btns[i].getAttribute("data-tocdo")) === v);
+  }
+}
+/* v3.1.5: vòng thử lại liên tục ~10 giây/lần cho gói tiếng của tập ĐANG MỞ
+   (đang ở màn thiết lập của tập hoặc đang chơi tập): gói chưa sẵn sàng thì
+   kích nạp lại qua chuanBiGiong — vẫn tôn trọng khóa đang nạp và chặn dồn
+   dập sẵn có, không bắn song song nhiều request cho cùng một gói. Gói về
+   rồi / tập bị đóng / chuyển sang tập khác thì vòng của tập cũ tự dừng. */
+function batVongThuLaiGiong(kk){
+  if (!kk || amHenThuLai[kk]) return;
+  amHenThuLai[kk] = setInterval(function(){
+    var tt = amTrangThai[kk];
+    if (tt === "ready" || tt === "empty" || tt === "local") { dungVongThuLaiGiong(kk); return; }
+    var phan = kk.split("|");
+    var dangMo = (S && !FIN && S.amKhoa === kk) ||
+      (typeof setupCtx !== "undefined" && setupCtx && setupCtx.muaId === phan[1] && setupCtx.tapId === phan[2]);
+    if (!dangMo) { dungVongThuLaiGiong(kk); return; }
+    if (tt === "loading") return; /* đang có lần nạp bay: không bắn chồng */
+    var m = muaById(phan[1]);
+    if (!m) { dungVongThuLaiGiong(kk); return; }
+    var tap = null;
+    (m.tap || []).forEach(function(t){ if (t.id === phan[2]) tap = t; });
+    if (tap) chuanBiGiong(m, tap);
+  }, 10000);
+}
+function dungVongThuLaiGiong(kk){
+  if (amHenThuLai[kk]) { clearInterval(amHenThuLai[kk]); delete amHenThuLai[kk]; }
+}
 function khoaTapAm(pack, muaId, tapId){ return pack + "|" + muaId + "|" + tapId; }
 function dungGiong(){
   amLuotPhat++; /* mọi lần dừng đều vô hiệu các fetch lẻ đang chờ phát (v3.1.4) */
@@ -1390,6 +1475,7 @@ function phatBlobGiong(blob){
     if (!amAudio) amAudio = new Audio();
     amURL = URL.createObjectURL(blob);
     amAudio.src = amURL;
+    apTocDoGiong(); /* v3.1.5: đặt tốc độ giọng đã chọn trước khi phát */
     var p = amAudio.play();
     if (p && p.catch) p.catch(function(){});
   } catch (e) {}
@@ -1403,6 +1489,7 @@ function phatTepGiong(duongDan){
     if (!amAudio) amAudio = new Audio();
     amAudio.onerror = function(){}; /* lỗi media: nuốt êm, không báo, không chặn truyện */
     amAudio.src = duongDan;
+    apTocDoGiong(); /* v3.1.5: tốc độ giọng áp cho cả chế độ offline file: (chung một phần tử audio) */
     var p = amAudio.play();
     if (p && p.catch) p.catch(function(){});
   } catch (e) {}
@@ -1465,6 +1552,17 @@ function xinRiengDong(kk, vk){
     if (!blob) return;
     if (!amBoDem[kk]) amBoDem[kk] = {};
     amBoDem[kk][vk] = blob; /* cất vào gói trong bộ nhớ: lần sau phát ngay */
+    /* v3.1.5: hợp nhất dòng lẻ này vào gói của tập trong đệm bền IndexedDB
+       (đọc bản ghi gói hiện có -> thêm/cập nhật khóa của dòng -> ghi lại,
+       đúng định dạng bản ghi hiện tại) để lần mở sau có sẵn, khỏi xin lại.
+       Mọi lỗi đệm đều nuốt êm, không chặn phát tiếng. */
+    try {
+      amDemDoc(kk, function(goiDem){
+        var g = (goiDem && typeof goiDem === "object") ? goiDem : {};
+        g[vk] = blob;
+        amDemGhi(kk, g);
+      });
+    } catch (e) {}
     if (luot !== amLuotPhat) return; /* dòng đã đổi trong lúc chờ: chỉ cất, không phát */
     if (!giongBat() || !S || FIN || S.amKhoa !== kk) return;
     phatBlobGiong(blob);
@@ -1584,6 +1682,7 @@ function chuanBiGiong(m, tap){
     amTrangThai[kk] = "local";
     return;
   }
+  batVongThuLaiGiong(kk); /* v3.1.5: tập đang mở mà gói chưa về thì vòng này kích nạp lại ~10 giây/lần tới khi sẵn sàng */
   amDemDoc(kk, function(goi){
     if (goi && Object.keys(goi).length) { amBoDem[kk] = goi; amTrangThai[kk] = "ready"; return; }
     napGiongTuDichVu(kk, pack, m.id, tap.id);
@@ -1668,7 +1767,10 @@ var ICON = {
   gate: ic('<path d="M4 21V10a8 6.5 0 0 1 16 0v11"/><path d="M2.5 21h19"/><path d="M9 21v-6.5a3 3 0 0 1 6 0V21"/>'),
   star: function(on){ return '<svg viewBox="0 0 24 24" fill="' + (on ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-3-5.4 3 1.1-6L3.2 9.4l6.1-.8z"/></svg>'; },
   back: ic('<path d="M15 4.5L7.5 12l7.5 7.5"/>'),
-  gear: ic('<circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/>'),
+  /* v3.1.5: bánh răng vẽ lại ĐẬM nét, răng cưa to rõ + lỗ tâm rõ ràng — hình
+     cũ (vòng tròn + 8 tia mảnh) nhìn giống mặt trời / nút chỉnh độ sáng nên
+     thầy và người dùng nhầm. Biểu tượng này chỉ dùng cho 3 nút Cài đặt. */
+  gear: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.23 4.61 L10.40 1.93 L13.60 1.93 L13.77 4.61 L15.97 5.52 L18.00 3.75 L20.25 6.00 L18.48 8.03 L19.39 10.23 L22.07 10.40 L22.07 13.60 L19.39 13.77 L18.48 15.97 L20.25 18.00 L18.00 20.25 L15.97 18.48 L13.77 19.39 L13.60 22.07 L10.40 22.07 L10.23 19.39 L8.03 18.48 L6.00 20.25 L3.75 18.00 L5.52 15.97 L4.61 13.77 L1.93 13.60 L1.93 10.40 L4.61 10.23 L5.52 8.03 L3.75 6.00 L6.00 3.75 L8.03 5.52 Z"/><circle cx="12" cy="12" r="3.4"/></svg>',
   soundOn: ic('<path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9.5a4 4 0 0 1 0 5"/><path d="M18 7a7.5 7.5 0 0 1 0 10"/>'),
   soundOff: ic('<path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/>'),
   voiceOn: ic('<circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c.8-3.2 2.8-4.8 5.5-4.8s4.7 1.6 5.5 4.8"/><path d="M16.8 9.8a3.6 3.6 0 0 1 0 4.4"/><path d="M19 7.4a7 7 0 0 1 0 9.2"/>'),
@@ -1684,7 +1786,7 @@ var LS_KEY = "ttt007_v1";
 var state = null;
 function defaultState(){
   return {
-    settings: { khoaTuan: true, amThanh: true, nhac: true, hieuUng: true, giongNhanVat: true },
+    settings: { khoaTuan: true, amThanh: true, nhac: true, hieuUng: true, giongNhanVat: true, tocDoGiong: 0.8 },
     lopHienTai: "",
     muaChon: "",
     classes: {}
@@ -1698,6 +1800,8 @@ function loadState(){
   } catch (e) { state = defaultState(); }
   /* Tiến trình lưu từ bản trước v3.1 chưa có khóa giọng nhân vật: mặc định BẬT */
   if (state.settings && typeof state.settings.giongNhanVat !== "boolean") state.settings.giongNhanVat = true;
+  /* Cài đặt lưu từ bản trước v3.1.5 chưa có tốc độ giọng: mặc định 0.8 "Chậm rãi" */
+  if (state.settings && [0.8, 0.9, 1].indexOf(state.settings.tocDoGiong) < 0) state.settings.tocDoGiong = 0.8;
 }
 function saveState(){
   try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
@@ -2630,11 +2734,22 @@ function renderMap(){
     j.appendChild(node);
   });
   j.querySelectorAll("button[data-tap]").forEach(function(b){
-    b.addEventListener("click", function(){ openSetup(curMuaId, b.getAttribute("data-tap")); });
+    b.addEventListener("click", function(){
+      var mCham = muaById(curMuaId);
+      var tCham = mCham ? (mCham.tap || []).filter(function(t){ return t.id === b.getAttribute("data-tap"); })[0] : null;
+      if (mCham && tCham) chuanBiGiong(mCham, tCham); /* v3.1.5: chạm thẻ tập nào thì nạp trước gói tiếng đúng tập đó */
+      openSetup(curMuaId, b.getAttribute("data-tap"));
+    });
   });
   $("map-week-note").textContent = state.settings.khoaTuan
     ? "Hôm nay đang ở tuần " + tuanHienTai() + " của năm học 2026–2027. Tập chưa tới tuần chiếu sẽ hiện nhãn “Sắp chiếu” (thầy có thể tắt khóa tuần trong Cài đặt)."
     : "Khóa tập theo tuần đang TẮT — mọi tập đều chiếu được.";
+  /* v3.1.5: nạp trước gói tiếng của tập kế tiếp chưa chơi của mùa đang xem
+     (tiến trình hiện tại đã tính sẵn ở biến next phía trên; mọi tập đã hoàn
+     thành — hoặc chưa chọn lớp — thì lấy tập đầu tiên của mùa). Mỗi lần
+     hiện màn mùa chỉ nạp trước tối đa 1 tập như vậy, không nạp ồ ạt cả mùa. */
+  var tapNapTruoc = next || (m.tap && m.tap.length ? m.tap[0] : null);
+  if (tapNapTruoc) chuanBiGiong(m, tapNapTruoc);
 }
 
 /* ================= THIẾT LẬP TRƯỚC TẬP ================= */
@@ -3748,6 +3863,7 @@ function openSettings(from){
   $("sw-music").checked = state.settings.nhac;
   $("sw-sfx").checked = state.settings.hieuUng;
   $("sw-voice").checked = giongBat();
+  refreshTocDoUI();
   $("set-week-now").textContent = "Tuần hiện tại: tuần " + tuanHienTai() + ".";
   $("btn-wipe-yes").style.display = "none";
   showScreen("scr-settings");
@@ -3758,6 +3874,12 @@ function bindSettings(){
   $("sw-music").addEventListener("change", function(){ state.settings.nhac = this.checked; saveState(); if (this.checked) capNhatNhacNen(); else stopMusic(); });
   $("sw-sfx").addEventListener("change", function(){ state.settings.hieuUng = this.checked; saveState(); });
   $("sw-voice").addEventListener("change", function(){ datGiongNhanVat(this.checked); toast(this.checked ? "Đã bật giọng nhân vật." : "Đã tắt giọng nhân vật — lớp phân vai đọc thoại như trước."); });
+  document.querySelectorAll("[data-tocdo]").forEach(function(b){
+    b.addEventListener("click", function(){
+      datTocDoGiong(parseFloat(b.getAttribute("data-tocdo")));
+      toast("Tốc độ giọng nhân vật: " + b.textContent + ".");
+    });
+  });
   $("btn-export-progress").addEventListener("click", function(){
     downloadJSON({ loai: "tien-trinh-007", phienBan: PHIEN_BAN, xuatLuc: new Date().toISOString(), duLieu: state }, "tien-trinh-truyen-tri-thuc-007.json");
     toast("Đã xuất tệp tiến trình.");
@@ -3773,6 +3895,7 @@ function bindSettings(){
         if (!d || !d.classes || !d.settings) throw new Error("bad");
         state = d;
         if (state.settings && typeof state.settings.giongNhanVat !== "boolean") state.settings.giongNhanVat = true;
+        if (state.settings && [0.8, 0.9, 1].indexOf(state.settings.tocDoGiong) < 0) state.settings.tocDoGiong = 0.8;
         saveState();
         openSettings(settingsFrom); renderLobby(); refreshMuteIcons();
         toast("Đã nhập tệp tiến trình thành công.");
@@ -3798,7 +3921,10 @@ function init(){
   ganAnh($("splash-art"), "splash");
   setIcon("lb-back", ICON.back); setIcon("ss-back", ICON.back); setIcon("map-back", ICON.back); setIcon("setup-back", ICON.back);
   setIcon("album-back", ICON.back); setIcon("set-back", ICON.back);
-  setIcon("lb-settings", ICON.gear); setIcon("ss-settings", ICON.gear); setIcon("map-settings", ICON.gear);
+  /* v3.1.5: kèm chữ "Cài đặt" nhỏ cạnh bánh răng ở 3 thanh trên — thầy từng
+     tưởng bánh răng là nút chỉnh độ sáng nên tìm không ra chỗ vào Cài đặt.
+     Nhãn nằm trong cùng một nút nên cả vùng vẫn bấm được như cũ. */
+  setIcon("lb-settings", ICON.gear + '<span class="set-lbl">Cài đặt</span>'); setIcon("ss-settings", ICON.gear + '<span class="set-lbl">Cài đặt</span>'); setIcon("map-settings", ICON.gear + '<span class="set-lbl">Cài đặt</span>');
   setIcon("play-exit", ICON.exit);
   setIcon("splash-frame-ic", ICON.book); setIcon("cover-frame-ic", ICON.book); setIcon("scene-fallback-ic", ICON.book);
   refreshMuteIcons();
