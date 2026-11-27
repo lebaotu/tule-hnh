@@ -4,23 +4,25 @@ Nền tảng **kho học liệu số đa môn cho giáo viên tiểu học** t�
 
 **Mở ứng dụng:** mở tệp `index.html` trong thư mục này bằng trình duyệt, hoặc qua GitHub Pages của repo (mục `004-kho-hoc-lieu-so/`).
 
-## Dữ liệu hiện có (bản phát hành 16/11/2026)
+## Dữ liệu hiện có (bản phát hành 27/11/2026)
 
-Tổng kho: **1.006 bài — 10.858 câu hỏi** ở đủ 7 môn:
+Tổng kho: **1.034 bài — 11.094 câu hỏi** ở đủ 7 môn:
 
 | Môn | Khối có dữ liệu | Số câu |
 |-----|------------------|--------|
-| Toán | Lớp 1, 2, 3, 4, 5 | 3.077 |
-| Tiếng Việt | Lớp 1, 2, 3, 4, 5 | 2.356 |
-| Tiếng Anh | Lớp 3, 4, 5 | 2.352 |
+| Toán | Lớp 1, 2, 3, 4, 5 | 3.095 |
+| Tiếng Việt | Lớp 1, 2, 3, 4, 5 | 2.428 |
+| Tiếng Anh | Lớp 3, 4, 5 | 2.370 |
 | Tin học | Lớp 3, 4, 5 | 1.125 |
-| Công nghệ | Lớp 3, 4, 5 | 467 |
-| Khoa học | Lớp 4, 5 | 708 |
-| Lịch sử & Địa lí | Lớp 4, 5 | 773 |
+| Công nghệ | Lớp 3, 4, 5 | 521 |
+| Khoa học | Lớp 4, 5 | 780 |
+| Lịch sử & Địa lí | Lớp 4, 5 | 775 |
 
 Mỗi câu hỏi có mức độ theo Thông tư 27 (Nhận biết / Kết nối / Vận dụng), lời giải thích hoặc đáp án mẫu (câu tự luận ngắn), yêu cầu cần đạt của bài và nguồn trang sách giáo khoa. Kho đã đầy đủ cho mọi môn ở đúng các khối lớp môn đó được dạy theo chương trình (Khoa học và Lịch sử & Địa lí chỉ học ở Lớp 4–5 nên ứng dụng chỉ hiện hai lớp này cho hai môn đó).
 
 ## Chức năng
+
+- **27/11/2026 — v1.3.9:** căn tuần và tên bài KHỐI 5 theo Kế hoạch môn học 2026–2027 của trường: 145 bài đổi tuần (giữ nguyên 100% mã và nội dung câu hỏi), sửa 2 tên bài theo SGK (Tiếng Việt "Đàn t’rưng – tiếng ca đại ngàn", LS&ĐL Bài 19 "Nước Cộng hoà Dân chủ Nhân dân Lào"), bổ sung 19 mục Ôn tập/Kiểm tra mới (171 câu) — khối 5 đạt 248 mục / 2.903 câu; tổng kho 7 môn / 1.034 bài / 11.094 câu.
 
 - **17/11/2026 — v1.3.6:** tên trường ở màn hình mở đầu đổi sang font Baloo 2 (nhúng trong tệp, chạy offline), giữ màu xanh navy đậm.
 - **17/11/2026 — v1.3.5:** cơ cấu LS&ĐL lớp 4 học kì II theo Kế hoạch môn học (CV 2345): Chủ đề 4 thành "Bắc Trung Bộ và Nam Trung Bộ", thêm Bài 18 "Truyền thống yêu nước, cách mạng…" (9 câu mới), đánh số lại từ Bài 18, 43 câu Tây Nguyên chuyển lưu trữ trong tệp NHCH; tổng kho 7 môn / 1.015 bài / 10.923 câu.
