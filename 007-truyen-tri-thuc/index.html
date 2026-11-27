@@ -720,8 +720,8 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
         <p><b>Dữ liệu truyện:</b> Thư viện Ánh Sao gồm các thế giới truyện của 7 môn học, 315 mùa truyện và 1.330 tập truyện, cùng các tập đấu trùm ở cuối mỗi chủ đề và sự kiện Đêm Chung Kết. Mỗi mùa truyện bám theo một chủ đề, mỗi tập truyện bám theo một bài học trong sách giáo khoa, để học sinh vừa phiêu lưu cùng Biệt đội Ánh Sao vừa ôn luyện đúng kiến thức của bài. Cốt truyện, lời thoại và thử thách được soạn riêng cho từng bài; câu hỏi trong thử thách được rút từ ngân hàng câu hỏi của đúng bài học đó.</p>
         <p><b>Ảnh minh họa:</b> ảnh được nạp từ thư mục “anh” đặt cạnh tệp của sản phẩm; mở tập nào app mới nạp ảnh của tập đó. Khi thư mục ảnh chưa có (ví dụ mở bản xem trước), truyện vẫn chơi trọn vẹn với nền cảnh dự phòng.</p>
         <p><b>Sự kiện Đêm Chung Kết:</b> ở Sảnh thư viện, mọi lớp đều dự được (không khóa tuần, không cần hoàn thành mùa nào trước). Cả lớp lần lượt thắp sáng các Cổng Thế Giới của khối lớp mình — mỗi cổng 2 đòn tri thức mức Kết nối/Vận dụng rút từ chính thế giới đó, trả lời sai có câu cứu viện mức Nhận biết của nhân vật dẫn đường — rồi đối mặt trùm cuối Sương Mù Quên Lãng với 6 đòn tổng hợp. Hoàn thành đêm, lớp nhận Huy Hiệu Ánh Sao trong Album hành trình.</p>
-        <p><b>Cập nhật:</b> v3.1.3 — Cập nhật tuần các bài khối 3 theo Kế hoạch môn học 2026–2027, khép kín việc căn kế hoạch môn học cho cả ba khối 3–4–5; dữ liệu được làm mới trên mọi thiết bị.</p>
-        <p><b>Phiên bản:</b> v3.1.3 — xây trên bản chính thức v2.0 Đêm Chung Kết (Final Release), bản chính thức đầu tiên của sản phẩm. Thư viện Ánh Sao đã đủ trọn 6 thế giới với 315 mùa truyện, 1.330 tập, và mở thêm sự kiện đặc biệt Đêm Chung Kết — trận quyết chiến cuối cùng với Sương Mù Quên Lãng dành cho mọi lớp.</p>
+        <p><b>Cập nhật:</b> v3.1.4 — Sửa tiếng nói nhân vật: bản offline (USB) nay phát tiếng trực tiếp từ thư mục audio đặt cạnh app, không còn bị trình duyệt chặn; bản mạng tự nạp lại khi mạng chập chờn và xin riêng từng dòng thoại, nên vào tập là có tiếng, không cần tải lại trang.</p>
+        <p><b>Phiên bản:</b> v3.1.4 — xây trên bản chính thức v2.0 Đêm Chung Kết (Final Release), bản chính thức đầu tiên của sản phẩm. Thư viện Ánh Sao đã đủ trọn 6 thế giới với 315 mùa truyện, 1.330 tập, và mở thêm sự kiện đặc biệt Đêm Chung Kết — trận quyết chiến cuối cùng với Sương Mù Quên Lãng dành cho mọi lớp.</p>
       </div>
     </div>
   </div>
@@ -887,7 +887,7 @@ var CAU_TIENG_ANH_THEO_LOP = {};
 var CAU_KHOA_HOC_THEO_LOP = {};
 var CAU_CONG_NGHE_THEO_LOP = {};
 var CAU_LICH_SU_DIA_LI_THEO_LOP = {};
-var PHIEN_BAN = "v3.1.3";
+var PHIEN_BAN = "v3.1.4";
 var DICH_VU_DL_URL = "https://script.google.com/macros/s/AKfycbyzLjsUUtfUBXK3LZXBNtQfy36dX0EMtXVBQspmpRipNAE3QSI8yopI0zzS8EFMiS0gcw/exec";
 var PB_DULIEU = "v3.1.3";
 var NHAN_VAT_TO = ["Minh Anh", "Tuấn Kiệt", "Thảo Nguyên", "Đức Trí", "Thủ thư Số", "Người đọc dũng cảm"];
@@ -1345,29 +1345,46 @@ function napGoi(mon, lop, cb){
          audio/<pack>/<muaId>/<tapId>/<canh>-<dong>.mp3 đặt cạnh index.html;
      (c) Dịch vụ dữ liệu Google hiện có:
          ?amthanh=<pack>/<muaId>/<tapId>&chia=<chuỗi băm trong bộ nhớ phiên>.
+   v3.1.4 "tiếng tức thì": (b) KHÔNG còn dùng fetch() — Chrome/Edge chặn
+   tuyệt đối fetch từ trang file:// nên bản USB câm hẳn; nay chuanBiGiong
+   chỉ ghi lại đường gốc của tập (amDuongGoc) và phatGiong gán thẳng
+   đường tương đối đó vào phần tử Audio để trình duyệt tự phát. Ở bản
+   mạng, nạp gói thất bại KHÔNG còn ghim trạng thái tới hết phiên trang:
+   trạng thái "error" kèm mốc thời gian (amLoiLuc), tự thử lại đúng 1 lần
+   sau ~6 giây, và phatGiong kích được lần thử mới khi sang dòng thoại
+   (chặn dồn dập tối thiểu ~5 giây giữa hai lần thử cho cùng một tập).
+   Gói chưa về kịp thì phatGiong xin RIÊNG đúng dòng đó qua dịch vụ
+   (?amthanh=<pack>/<muaId>/<tapId>/<khóa dòng>), cất Blob vào gói trong
+   bộ nhớ rồi phát — chỉ phát nếu dòng đó vẫn là dòng hiện tại khi fetch
+   hoàn tất (biến đếm amLuotPhat tăng mỗi lần phatGiong/dungGiong).
    Mọi lỗi (mất mạng, chưa có audio, đệm hỏng...) đều được nuốt êm: truyện
    vẫn chạy dạng chữ như trước, TUYỆT ĐỐI không chặn truyện, không báo lỗi.
-   Phát bằng MỘT phần tử Audio dùng chung + ObjectURL từ Blob của dòng;
-   KHÔNG tự chuyển dòng khi tiếng kết thúc — nhịp tiết vẫn do thầy điều
-   khiển bằng nút Tiếp như cũ. Thiếu audio của một dòng thì bỏ qua lặng lẽ. */
+   Phát bằng MỘT phần tử Audio dùng chung: Blob thì qua ObjectURL, bản
+   local thì gán thẳng đường dẫn tương đối; KHÔNG tự chuyển dòng khi
+   tiếng kết thúc — nhịp tiết vẫn do thầy điều khiển bằng nút Tiếp như
+   cũ. Thiếu audio của một dòng thì bỏ qua lặng lẽ. */
 var amBoDem = {};      /* khoaTap -> { "<canh>-<dong>": Blob } */
-var amTrangThai = {};  /* khoaTap -> loading | ready | empty (chỉ trong phiên) */
+var amTrangThai = {};  /* khoaTap -> loading | ready | empty | local | error (chỉ trong phiên; v3.1.4: "error" kèm mốc thời gian trong amLoiLuc, KHÔNG ghim tới hết phiên) */
 var amAudio = null;    /* phần tử Audio dùng chung cho mọi dòng thoại */
 var amURL = null;      /* ObjectURL đang phát, thu hồi ngay khi dừng */
+var amDuongGoc = {};   /* khoaTap -> "audio/<pack>/<muaId>/<tapId>/" khi tập chạy chế độ local (file:) — v3.1.4 */
+var amLoiLuc = {};     /* khoaTap -> mốc thời gian (ms) lần nạp gói thất bại gần nhất — v3.1.4 */
+var amThuLuc = {};     /* khoaTap -> mốc thời gian (ms) lần bắt đầu nạp gói gần nhất, chặn dồn dập — v3.1.4 */
+var amDaThuLai = {};   /* khoaTap -> true khi lần tự thử lại sau ~6 giây đã dùng — v3.1.4 */
+var amDongDangBay = {};/* "<khoaTap>|<khóa dòng>" -> true khi fetch lẻ của dòng đó đang bay — v3.1.4 */
+var amLuotPhat = 0;    /* đếm lượt phát/dòng hiện tại: tăng mỗi lần phatGiong/dungGiong — v3.1.4 */
 function giongBat(){ return !!(state && state.settings && state.settings.giongNhanVat); }
 function khoaTapAm(pack, muaId, tapId){ return pack + "|" + muaId + "|" + tapId; }
 function dungGiong(){
+  amLuotPhat++; /* mọi lần dừng đều vô hiệu các fetch lẻ đang chờ phát (v3.1.4) */
   if (amAudio) {
     try { amAudio.pause(); } catch (e) {}
     try { amAudio.removeAttribute("src"); } catch (e) {}
   }
   if (amURL) { try { URL.revokeObjectURL(amURL); } catch (e) {} amURL = null; }
 }
-function phatGiong(vk){
-  if (!vk || !giongBat() || !S || FIN) return;
-  var goi = S.amKhoa ? amBoDem[S.amKhoa] : null;
-  var blob = goi ? goi[vk] : null;
-  if (!blob) return; /* thiếu audio của dòng này: bỏ qua lặng lẽ */
+/* Phát một Blob qua phần tử Audio dùng chung (đường Blob như cũ) */
+function phatBlobGiong(blob){
   dungGiong();
   try {
     if (!amAudio) amAudio = new Audio();
@@ -1376,6 +1393,86 @@ function phatGiong(vk){
     var p = amAudio.play();
     if (p && p.catch) p.catch(function(){});
   } catch (e) {}
+}
+/* Phát thẳng một tệp mp3 theo đường tương đối cạnh app (bản local file:,
+   v3.1.4): trình duyệt cho phép <audio> tải tệp cạnh trang file://, không
+   cần và không được dùng fetch. File thiếu/lỗi thì im lặng bỏ qua dòng đó. */
+function phatTepGiong(duongDan){
+  dungGiong();
+  try {
+    if (!amAudio) amAudio = new Audio();
+    amAudio.onerror = function(){}; /* lỗi media: nuốt êm, không báo, không chặn truyện */
+    amAudio.src = duongDan;
+    var p = amAudio.play();
+    if (p && p.catch) p.catch(function(){});
+  } catch (e) {}
+}
+function phatGiong(vk){
+  amLuotPhat++; /* dòng hiện tại vừa đổi: mọi fetch lẻ của dòng trước chỉ còn được cất Blob, không phát (v3.1.4) */
+  if (!vk || !giongBat() || !S || FIN) return;
+  var kk = S.amKhoa || null;
+  /* Tập đang ở chế độ local (file:): phát thẳng tệp cạnh app, không qua Blob */
+  if (kk && amTrangThai[kk] === "local" && amDuongGoc[kk]) { phatTepGiong(amDuongGoc[kk] + vk + ".mp3"); return; }
+  var goi = kk ? amBoDem[kk] : null;
+  var blob = goi ? goi[vk] : null;
+  if (blob) { phatBlobGiong(blob); return; }
+  /* Chưa có Blob của dòng này (v3.1.4): bản mạng thì xin riêng đúng dòng đó
+     qua dịch vụ; đồng thời nếu gói của tập đang ở trạng thái lỗi thì kích
+     lại một lần nạp gói mới (chuanBiGiong tự chặn dồn dập theo mốc thời gian). */
+  if (kk && window.location && (location.protocol === "http:" || location.protocol === "https:")) {
+    if (amTrangThai[kk] === "error") {
+      var mNow = null;
+      try { mNow = muaById(S.muaId); } catch (e) {}
+      if (mNow && S.tap) chuanBiGiong(mNow, S.tap);
+    }
+    xinRiengDong(kk, vk);
+  }
+  /* thiếu audio của dòng này: bỏ qua lặng lẽ */
+}
+/* Xin riêng MỘT dòng thoại từ Dịch vụ dữ liệu (v3.1.4): dùng khi gói của
+   tập chưa về kịp. Đáp {ok:true, loai:"dong", mp3:"<base64>"} -> giải mã
+   thành Blob, cất vào gói trong bộ nhớ của tập (amBoDem[kk][vk]) để lần
+   sau phát ngay; chỉ phát nếu dòng vẫn là dòng hiện tại khi fetch xong
+   (amLuotPhat chưa đổi). Mỗi khóa dòng tối đa 1 fetch lẻ đang bay; timeout
+   ~20 giây; mọi lỗi đều nuốt êm. Lỗi sai-chia/dang-tat xử lý như luồng gói. */
+function xinRiengDong(kk, vk){
+  if (!kk || !vk || !chiaDuLieu) return;
+  var khoaDong = kk + "|" + vk;
+  if (amDongDangBay[khoaDong]) return;
+  var phan = kk.split("|");
+  if (phan.length !== 3) return;
+  var luot = amLuotPhat; /* chụp lượt phát tại thời điểm xin: đổi lượt là hết còn là dòng hiện tại */
+  amDongDangBay[khoaDong] = true;
+  var hetGio = null, ctrl = null, opts = {};
+  try {
+    if (window.AbortController) {
+      ctrl = new AbortController();
+      opts.signal = ctrl.signal;
+      hetGio = setTimeout(function(){ try { ctrl.abort(); } catch (e) {} }, 20000);
+    }
+  } catch (e) {}
+  var url = DICH_VU_DL_URL + "?amthanh=" + encodeURIComponent(phan[0] + "/" + phan[1] + "/" + phan[2] + "/" + vk) + "&chia=" + encodeURIComponent(chiaDuLieu);
+  fetch(url, opts).then(function(res){ return res.text(); }).then(function(text){
+    if (hetGio) clearTimeout(hetGio);
+    delete amDongDangBay[khoaDong];
+    var j = null;
+    try { j = JSON.parse(text); } catch (e) {}
+    if (!j || j.ok === false) {
+      if (j && (j.loi === "sai-chia" || j.loi === "dang-tat")) khoaLaiViDichVu(j.loi);
+      return;
+    }
+    var blob = j.mp3 ? b64ThanhBlob(j.mp3) : null;
+    if (!blob) return;
+    if (!amBoDem[kk]) amBoDem[kk] = {};
+    amBoDem[kk][vk] = blob; /* cất vào gói trong bộ nhớ: lần sau phát ngay */
+    if (luot !== amLuotPhat) return; /* dòng đã đổi trong lúc chờ: chỉ cất, không phát */
+    if (!giongBat() || !S || FIN || S.amKhoa !== kk) return;
+    phatBlobGiong(blob);
+  }).catch(function(){
+    if (hetGio) clearTimeout(hetGio);
+    delete amDongDangBay[khoaDong];
+    /* lỗi/timeout: im lặng bỏ qua dòng này */
+  });
 }
 function datGiongNhanVat(bat){
   if (!state || !state.settings) return;
@@ -1471,42 +1568,60 @@ function chuanBiGiong(m, tap){
   var pack = khoaGoi(m.mon, m.lop);
   if (!pack) return;
   var kk = khoaTapAm(pack, m.id, tap.id);
-  if (amTrangThai[kk]) return; /* đang nạp / đã có / đã biết là trống: không nạp lại */
+  var tt = amTrangThai[kk];
+  if (tt === "loading" || tt === "ready" || tt === "empty" || tt === "local") return; /* đang nạp / đã có / đã biết là trống / đang phát thẳng tệp local: không nạp lại */
+  /* v3.1.4: trạng thái "error" KHÔNG còn ghim tới hết phiên — được gọi lại
+     (vào lại tập hoặc sang dòng thoại mới đều kích được), nhưng chặn dồn
+     dập: tối thiểu ~5 giây giữa hai lần thử nạp cho cùng một tập. */
+  if (tt === "error" && amThuLuc[kk] && (Date.now() - amThuLuc[kk] < 5000)) return;
   amTrangThai[kk] = "loading";
+  amThuLuc[kk] = Date.now();
+  /* Bản offline file: (v3.1.4): KHÔNG fetch, KHÔNG đọc đệm — ghi lại đường
+     gốc của tập và đánh dấu sẵn sàng kiểu "local"; phatGiong sẽ gán thẳng
+     đường tương đối của từng dòng vào phần tử Audio để phát. */
+  if (window.location && location.protocol === "file:") {
+    amDuongGoc[kk] = "audio/" + pack + "/" + m.id + "/" + tap.id + "/";
+    amTrangThai[kk] = "local";
+    return;
+  }
   amDemDoc(kk, function(goi){
     if (goi && Object.keys(goi).length) { amBoDem[kk] = goi; amTrangThai[kk] = "ready"; return; }
-    if (window.location && location.protocol === "file:") napGiongTuTep(kk, pack, m.id, tap.id, tap);
-    else napGiongTuDichVu(kk, pack, m.id, tap.id);
+    napGiongTuDichVu(kk, pack, m.id, tap.id);
   });
 }
-/* Nguồn (b): tệp mp3 đặt cạnh app (bản USB offline). Gom đủ mọi dòng thì
-   đưa vào đệm; mới được một phần thì giữ trong bộ nhớ phiên để dùng ngay;
-   không được tệp nào thì mới sang nguồn dịch vụ. */
-function napGiongTuTep(kk, pack, muaId, tapId, tap){
-  var keys = cacKhoaDongCuaTap(tap);
-  if (!keys.length) { amTrangThai[kk] = "empty"; return; }
-  var goi = {}, daXong = 0, duDu = true;
-  keys.forEach(function(k){
-    fetch("audio/" + pack + "/" + muaId + "/" + tapId + "/" + k + ".mp3").then(function(res){
-      if (!res.ok) throw new Error("no-file");
-      return res.blob();
-    }).then(function(blob){
-      goi[k] = blob;
-    }).catch(function(){
-      duDu = false;
-    }).then(function(){
-      daXong++;
-      if (daXong < keys.length) return;
-      if (Object.keys(goi).length) {
-        amBoDem[kk] = goi; amTrangThai[kk] = "ready";
-        if (duDu) amDemGhi(kk, goi);
-      } else napGiongTuDichVu(kk, pack, muaId, tapId);
-    });
-  });
+/* Nguồn (b) cũ napGiongTuTep đã BỎ ở v3.1.4: nó dùng fetch() đọc tệp mp3
+   cạnh app, mà Chrome/Edge chặn tuyệt đối fetch từ trang file:// nên bản
+   USB offline câm hẳn. Chế độ file: nay do chuanBiGiong xử lý trực tiếp:
+   ghi đường gốc vào amDuongGoc, đánh dấu trạng thái "local", phatGiong
+   phát thẳng tệp tương đối — không fetch, không Blob, không đệm. */
+/* Ghi nhận một lần nạp gói thất bại (v3.1.4): trạng thái "error" kèm mốc
+   thời gian thay cho trạng thái chết ghim tới hết phiên như trước; tự động
+   thử lại ĐÚNG 1 lần sau ~6 giây (chỉ khi tập đó vẫn là tập đang mở và
+   chưa có gói nào về trong lúc chờ). Sau lần tự thử lại mà vẫn lỗi thì
+   chờ lần kích tiếp theo từ chuanBiGiong/phatGiong (vẫn chặn dồn dập). */
+function ghiLoiNapGiong(kk, pack, muaId, tapId){
+  amTrangThai[kk] = "error";
+  amLoiLuc[kk] = Date.now();
+  if (amDaThuLai[kk]) return;
+  amDaThuLai[kk] = true;
+  setTimeout(function(){
+    if (amTrangThai[kk] !== "error") return; /* đã có gói/local trong lúc chờ */
+    /* Chỉ nạp khi tập đó vẫn đang ở trước mặt thầy: đang chơi (S) hoặc đang
+       mở ở màn thiết lập (setupCtx) — rời hẳn sang tập khác thì thôi, vào
+       lại tập sẽ có lần kích mới từ chuanBiGiong/phatGiong. */
+    var dangMo = (S && !FIN && S.amKhoa === kk) ||
+      (typeof setupCtx !== "undefined" && setupCtx && kk.split("|")[1] === setupCtx.muaId && kk.split("|")[2] === setupCtx.tapId);
+    if (!dangMo) return;
+    amTrangThai[kk] = "loading";
+    amThuLuc[kk] = Date.now();
+    napGiongTuDichVu(kk, pack, muaId, tapId);
+  }, 6000);
 }
 /* Nguồn (c): Dịch vụ dữ liệu Google — cùng cổng chìa với bộ nạp gói dữ liệu.
-   Lỗi "sai-chia" / "dang-tat" khóa lại theo đúng luồng sẵn có; mọi lỗi khác
-   chỉ làm tập này chạy dạng chữ lặng lẽ. */
+   Lỗi "sai-chia" / "dang-tat" khóa lại theo đúng luồng sẵn có và vẫn chốt
+   "empty" như cũ; gói trả về rỗng (tập chưa có audio) cũng là "empty" dứt
+   khoát. Riêng lỗi mạng/timeout/đáp hỏng (v3.1.4) đi qua ghiLoiNapGiong để
+   còn đường tự thử lại, không ghim chết tới hết phiên trang. */
 function napGiongTuDichVu(kk, pack, muaId, tapId){
   if (!chiaDuLieu) { amTrangThai[kk] = "empty"; return; }
   var hetGio = null, ctrl = null, opts = {};
@@ -1522,9 +1637,10 @@ function napGiongTuDichVu(kk, pack, muaId, tapId){
     if (hetGio) clearTimeout(hetGio);
     var j = null;
     try { j = JSON.parse(text); } catch (e) {}
-    if (!j || j.ok === false) {
-      if (j && (j.loi === "sai-chia" || j.loi === "dang-tat")) khoaLaiViDichVu(j.loi);
-      amTrangThai[kk] = "empty";
+    if (!j) { ghiLoiNapGiong(kk, pack, muaId, tapId); return; } /* đáp hỏng: coi như lỗi tạm, còn đường thử lại */
+    if (j.ok === false) {
+      if (j.loi === "sai-chia" || j.loi === "dang-tat") { khoaLaiViDichVu(j.loi); amTrangThai[kk] = "empty"; }
+      else ghiLoiNapGiong(kk, pack, muaId, tapId);
       return;
     }
     var goi = {};
@@ -1533,7 +1649,7 @@ function napGiongTuDichVu(kk, pack, muaId, tapId){
     else amTrangThai[kk] = "empty";
   }).catch(function(){
     if (hetGio) clearTimeout(hetGio);
-    amTrangThai[kk] = "empty"; /* mất mạng / chưa có audio: chơi tiếp dạng chữ lặng lẽ */
+    ghiLoiNapGiong(kk, pack, muaId, tapId); /* mất mạng / timeout: ghi lỗi kèm mốc thời gian, tự thử lại sau (v3.1.4) */
   });
 }
 
