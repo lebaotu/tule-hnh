@@ -761,8 +761,8 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
         <p><b>Dữ liệu truyện:</b> Thư viện Ánh Sao gồm các thế giới truyện của 7 môn học, 315 mùa truyện và 1.330 tập truyện, cùng các tập đấu trùm ở cuối mỗi chủ đề và sự kiện Đêm Chung Kết. Mỗi mùa truyện bám theo một chủ đề, mỗi tập truyện bám theo một bài học trong sách giáo khoa, để học sinh vừa phiêu lưu cùng Biệt đội Ánh Sao vừa ôn luyện đúng kiến thức của bài. Cốt truyện, lời thoại và thử thách được soạn riêng cho từng bài; câu hỏi trong thử thách được rút từ ngân hàng câu hỏi của đúng bài học đó.</p>
         <p><b>Ảnh minh họa:</b> ảnh được nạp từ thư mục “anh” đặt cạnh tệp của sản phẩm; mở tập nào app mới nạp ảnh của tập đó. Khi thư mục ảnh chưa có (ví dụ mở bản xem trước), truyện vẫn chơi trọn vẹn với nền cảnh dự phòng.</p>
         <p><b>Sự kiện Đêm Chung Kết:</b> ở Sảnh thư viện, mọi lớp đều dự được (không khóa tuần, không cần hoàn thành mùa nào trước). Cả lớp lần lượt thắp sáng các Cổng Thế Giới của khối lớp mình — mỗi cổng 2 đòn tri thức mức Kết nối/Vận dụng rút từ chính thế giới đó, trả lời sai có câu cứu viện mức Nhận biết của nhân vật dẫn đường — rồi đối mặt trùm cuối Sương Mù Quên Lãng với 6 đòn tổng hợp. Hoàn thành đêm, lớp nhận Huy Hiệu Ánh Sao trong Album hành trình.</p>
-        <p><b>Cập nhật:</b> v3.1.6 — Tốc độ giọng trong Cài đặt chuyển thành thanh trượt 5 nấc: mốc 0 ở giữa là tốc độ gốc, kéo sang trái chậm hơn (−1, −2), kéo sang phải nhanh hơn (+1, +2) — kéo tới đâu giọng đổi ngay tới đó. Sửa vỡ bố cục màn Cài đặt trên điện thoại: trên màn hình hẹp, các hàng cài đặt xếp chồng gọn gàng, nhãn và phần điều khiển không còn bóp nhau nữa.</p>
-        <p><b>Phiên bản:</b> v3.1.6 — xây trên bản chính thức v2.0 Đêm Chung Kết (Final Release), bản chính thức đầu tiên của sản phẩm. Thư viện Ánh Sao đã đủ trọn 6 thế giới với 315 mùa truyện, 1.330 tập, và mở thêm sự kiện đặc biệt Đêm Chung Kết — trận quyết chiến cuối cùng với Sương Mù Quên Lãng dành cho mọi lớp.</p>
+        <p><b>Cập nhật:</b> v3.2.0 — Giọng nhân vật chuyển sang phát từ kho tĩnh chuyên dụng: tiếng về nhanh và đều hơn hẳn, mở tập là có tiếng ngay. Đường phát cũ qua Google vẫn được giữ làm dự phòng tự động khi kho tĩnh có trục trặc. Trước đó, v3.1.6 đã đổi Tốc độ giọng trong Cài đặt thành thanh trượt 5 nấc (mốc 0 ở giữa là tốc độ gốc) và sửa vỡ bố cục màn Cài đặt trên điện thoại.</p>
+        <p><b>Phiên bản:</b> v3.2.0 — xây trên bản chính thức v2.0 Đêm Chung Kết (Final Release), bản chính thức đầu tiên của sản phẩm. Thư viện Ánh Sao đã đủ trọn 6 thế giới với 315 mùa truyện, 1.330 tập, và mở thêm sự kiện đặc biệt Đêm Chung Kết — trận quyết chiến cuối cùng với Sương Mù Quên Lãng dành cho mọi lớp.</p>
       </div>
     </div>
   </div>
@@ -928,9 +928,10 @@ var CAU_TIENG_ANH_THEO_LOP = {};
 var CAU_KHOA_HOC_THEO_LOP = {};
 var CAU_CONG_NGHE_THEO_LOP = {};
 var CAU_LICH_SU_DIA_LI_THEO_LOP = {};
-var PHIEN_BAN = "v3.1.6";
+var PHIEN_BAN = "v3.2.0";
 var DICH_VU_DL_URL = "https://script.google.com/macros/s/AKfycbyzLjsUUtfUBXK3LZXBNtQfy36dX0EMtXVBQspmpRipNAE3QSI8yopI0zzS8EFMiS0gcw/exec";
 var PB_DULIEU = "v3.1.3";
+var AM_TINH_URL = "https://pub-349d00f579b3482c83e10c2141fc507e.r2.dev"; /* Kho tinh Cloudflare R2: goc phat MP3 long tieng cong khai (v3.2) */
 var NHAN_VAT_TO = ["Minh Anh", "Tuấn Kiệt", "Thảo Nguyên", "Đức Trí", "Thủ thư Số", "Người đọc dũng cảm"];
 
 /* ================= KHÓA MÃ TRUY CẬP Ở MÀN HÌNH CHÀO (v2.8) =================
@@ -1400,7 +1401,11 @@ function napGoi(mon, lop, cb){
      (a) đệm IndexedDB "ttt007-dem-am-v2" / store "tap";
      (b) bản USB (location.protocol === "file:"): tệp tương đối
          audio/<pack>/<muaId>/<tapId>/<canh>-<dong>.mp3 đặt cạnh index.html;
-     (c) Dịch vụ dữ liệu Google hiện có:
+     (c) Kho tĩnh Cloudflare R2 (MỚI ở v3.2): tải thẳng từng dòng MP3
+         công khai <AM_TINH_URL>/<pack>/<muaId>/<tapId>/<khóa dòng>.mp3 —
+         nhanh và đều hơn hẳn đường Google; nạp đủ dòng nào hay dòng đó,
+         cất vào đệm bền như gói thường.
+     (d) Dịch vụ dữ liệu Google (giữ làm dự phòng khi kho tĩnh trục trặc):
          ?amthanh=<pack>/<muaId>/<tapId>&chia=<chuỗi băm trong bộ nhớ phiên>.
    v3.1.4 "tiếng tức thì": (b) KHÔNG còn dùng fetch() — Chrome/Edge chặn
    tuyệt đối fetch từ trang file:// nên bản USB câm hẳn; nay chuanBiGiong
@@ -1575,13 +1580,62 @@ function phatGiong(vk){
   }
   /* thiếu audio của dòng này: bỏ qua lặng lẽ */
 }
+/* Xin riêng MỘT dòng thoại từ kho tĩnh (v3.2): thử đường tĩnh trước —
+   một GET thẳng tới tệp MP3 công khai của đúng dòng đó, không cần chìa.
+   Về được thì cất vào gói trong bộ nhớ + hợp nhất đệm bền rồi phát nếu
+   dòng vẫn là dòng hiện tại (đúng nghi thức của đường dịch vụ). Hỏng /
+   trống / quá ~15 giây thì nhường cho đường dịch vụ cũ xinRiengDongQuaDichVu.
+   Cờ đang-bay dùng chung khóa với đường dịch vụ nên hai đường không bắn
+   trùng một dòng. */
+function xinRiengDong(kk, vk){
+  if (!kk || !vk) return;
+  var khoaDong = kk + "|" + vk;
+  if (amDongDangBay[khoaDong]) return;
+  var phan = kk.split("|");
+  if (phan.length !== 3) return;
+  var luot = amLuotPhat;
+  amDongDangBay[khoaDong] = true;
+  var hetGio = null, ctrl = null, opts = {};
+  try {
+    if (window.AbortController) {
+      ctrl = new AbortController();
+      opts.signal = ctrl.signal;
+      hetGio = setTimeout(function(){ try { ctrl.abort(); } catch (e) {} }, 15000);
+    }
+  } catch (e) {}
+  var url = AM_TINH_URL + "/" + phan[0] + "/" + phan[1] + "/" + phan[2] + "/" + encodeURIComponent(vk) + ".mp3";
+  fetch(url, opts).then(function(res){
+    if (!res.ok) throw new Error("http " + res.status);
+    return res.blob();
+  }).then(function(blob){
+    if (hetGio) clearTimeout(hetGio);
+    delete amDongDangBay[khoaDong];
+    if (!blob || !blob.size) { xinRiengDongQuaDichVu(kk, vk); return; }
+    if (!amBoDem[kk]) amBoDem[kk] = {};
+    amBoDem[kk][vk] = blob;
+    try {
+      amDemDoc(kk, function(goiDem){
+        var g = (goiDem && typeof goiDem === "object") ? goiDem : {};
+        g[vk] = blob;
+        amDemGhi(kk, g);
+      });
+    } catch (e) {}
+    if (luot !== amLuotPhat) return;
+    if (!giongBat() || !S || FIN || S.amKhoa !== kk) return;
+    phatBlobGiong(blob);
+  }).catch(function(){
+    if (hetGio) clearTimeout(hetGio);
+    delete amDongDangBay[khoaDong];
+    xinRiengDongQuaDichVu(kk, vk);
+  });
+}
 /* Xin riêng MỘT dòng thoại từ Dịch vụ dữ liệu (v3.1.4): dùng khi gói của
    tập chưa về kịp. Đáp {ok:true, loai:"dong", mp3:"<base64>"} -> giải mã
    thành Blob, cất vào gói trong bộ nhớ của tập (amBoDem[kk][vk]) để lần
    sau phát ngay; chỉ phát nếu dòng vẫn là dòng hiện tại khi fetch xong
    (amLuotPhat chưa đổi). Mỗi khóa dòng tối đa 1 fetch lẻ đang bay; timeout
    ~20 giây; mọi lỗi đều nuốt êm. Lỗi sai-chia/dang-tat xử lý như luồng gói. */
-function xinRiengDong(kk, vk){
+function xinRiengDongQuaDichVu(kk, vk){
   if (!kk || !vk || !chiaDuLieu) return;
   var khoaDong = kk + "|" + vk;
   if (amDongDangBay[khoaDong]) return;
@@ -1744,7 +1798,10 @@ function chuanBiGiong(m, tap){
   batVongThuLaiGiong(kk); /* v3.1.5: tập đang mở mà gói chưa về thì vòng này kích nạp lại ~10 giây/lần tới khi sẵn sàng */
   amDemDoc(kk, function(goi){
     if (goi && Object.keys(goi).length) { amBoDem[kk] = goi; amTrangThai[kk] = "ready"; return; }
-    napGiongTuDichVu(kk, pack, m.id, tap.id);
+    /* v3.2: kho tĩnh trước; kho tĩnh không có dòng nào mới rơi xuống dịch vụ */
+    napGiongTuKhoTinh(kk, pack, m.id, tap.id, cacKhoaDongCuaTap(tap), function(ok){
+      if (!ok) napGiongTuDichVu(kk, pack, m.id, tap.id);
+    });
   });
 }
 /* Nguồn (b) cũ napGiongTuTep đã BỎ ở v3.1.4: nó dùng fetch() đọc tệp mp3
@@ -1775,7 +1832,34 @@ function ghiLoiNapGiong(kk, pack, muaId, tapId){
     napGiongTuDichVu(kk, pack, muaId, tapId);
   }, 6000);
 }
-/* Nguồn (c): Dịch vụ dữ liệu Google — cùng cổng chìa với bộ nạp gói dữ liệu.
+/* Nguồn (c) MỚI ở v3.2: kho tĩnh Cloudflare R2 — tải thẳng từng dòng MP3
+   công khai của tập, tối đa 6 dòng song song; dòng nào về được thì cất vào
+   gói, đủ bộ thì chốt "ready" và ghi đệm bền như gói dịch vụ. Có ít nhất
+   một dòng thì coi là thành công (dòng thiếu sẽ được xinRiengDong lo tiếp
+   khi phát tới); không dòng nào (kho tĩnh trục trặc / tập chưa có tiếng)
+   thì báo xong(false) để chuanBiGiong rơi xuống nguồn (d) dịch vụ. Tập
+   không có khóa dòng nào thì bỏ qua ngay. Mọi lỗi đều nuốt êm. */
+function napGiongTuKhoTinh(kk, pack, muaId, tapId, cacKhoa, xong){
+  if (!cacKhoa || !cacKhoa.length) { xong(false); return; }
+  var goi = {}, conLai = cacKhoa.length, coDong = false, idx = 0, daXong = false;
+  function hoanTat(){
+    if (daXong) return;
+    daXong = true;
+    if (coDong) { amBoDem[kk] = goi; amTrangThai[kk] = "ready"; amDemGhi(kk, goi); }
+    xong(coDong);
+  }
+  function keo(){
+    if (idx >= cacKhoa.length) return;
+    var vk = cacKhoa[idx++];
+    fetch(AM_TINH_URL + "/" + pack + "/" + muaId + "/" + tapId + "/" + encodeURIComponent(vk) + ".mp3")
+      .then(function(res){ if (!res.ok) throw new Error("http " + res.status); return res.blob(); })
+      .then(function(blob){ if (blob && blob.size > 0) { goi[vk] = blob; coDong = true; } })
+      .catch(function(){})
+      .then(function(){ conLai--; if (conLai <= 0) hoanTat(); else keo(); });
+  }
+  for (var n = 0; n < Math.min(6, cacKhoa.length); n++) keo();
+}
+/* Nguồn (d): Dịch vụ dữ liệu Google — cùng cổng chìa với bộ nạp gói dữ liệu.
    Lỗi "sai-chia" / "dang-tat" khóa lại theo đúng luồng sẵn có và vẫn chốt
    "empty" như cũ; gói trả về rỗng (tập chưa có audio) cũng là "empty" dứt
    khoát. Riêng lỗi mạng/timeout/đáp hỏng (v3.1.4) đi qua ghiLoiNapGiong để
