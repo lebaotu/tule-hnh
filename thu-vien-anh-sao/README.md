@@ -171,3 +171,9 @@ Từ v3.2.0, địa chỉ chính thức của sản phẩm là **https://lebaotu
 
 - Kiểm chứng v3.2.1: lỗi nói trọn hết câu đã hết (bấm sớm là cắt giữa câu), nhưng tai kiểm còn nghe rò ~1–2 giây phần tiếng đã đệm sau khi bấm. Gia cố: dungGiong gọi thêm load() sau khi gỡ src để phần tử phát nhả hẳn dữ liệu đã đệm; mỗi dòng thoại phát bằng một phần tử Audio mới (bỏ dùng chung một phần tử cho mọi dòng) — phần tử cũ đã dừng + nhả đệm thì không gì phát lại được.
 - Chỉ phát hành ở địa chỉ VIP như v3.2.1; các địa chỉ còn lại giữ nguyên.
+
+## v3.2.3 (28/11/2026) — Nhịp chờ 0,5 giây trước khi cất tiếng
+
+- Ý thầy Tú từ dùng thật: giọng nhân vật đọc LIỀN ngay khi vừa chuyển cảnh/chuyển đoạn, nghe như gió; thầy muốn đầu mỗi đoạn đợi ~0,5 giây rồi nhân vật mới nói.
+- Cách vá: hai hàm phát cuối (Blob và tệp) vẫn dừng dòng cũ tức thì như v3.2.2, nhưng phần cất tiếng của dòng mới được hẹn sau 500 ms, gắn với bộ đếm lượt phát — trong lúc chờ mà chuyển bước/dừng/tắt giọng thì dòng chờ tự hủy, không phát chồng, không phát muộn.
+- Chỉ phát hành ở địa chỉ VIP; các địa chỉ còn lại giữ nguyên.
