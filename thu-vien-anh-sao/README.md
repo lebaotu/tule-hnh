@@ -166,3 +166,8 @@ Từ v3.2.0, địa chỉ chính thức của sản phẩm là **https://lebaotu
 - Thầy Tú báo từ thực tế dùng: đang nghe đoạn dẫn mà bấm "Đối mặt thử thách" thì tiếng đoạn dẫn vẫn nói tiếp cho hết câu ngay trên màn câu hỏi. Tái hiện được trên bản sống (vào thử thách rò ~3–4 giây; thoại sang thoại thì dừng ngay như thường).
 - Gốc lỗi: hàm nextQuestion (cửa vào câu hỏi và qua câu kế tiếp trong thử thách) thiếu lệnh dừng giọng — các cửa chuyển bước khác đều có. Vá đúng một chỗ: gọi dungGiong() ở đầu nextQuestion, kèm vô hiệu mọi fetch lẻ đang chờ phát như cơ chế sẵn có.
 - Giữ nguyên mọi thứ còn lại của v3.2.0 (kho tĩnh Cloudflare R2 + dự phòng Google, PB_DULIEU "v3.1.3", khóa ttt007_v1). Bản vá chỉ phát hành ở địa chỉ VIP; địa chỉ 007 cũ giữ bản v3.0 chia sẻ thử nghiệm, không đổi.
+
+## v3.2.2 (28/11/2026) — Gia cố cắt tiếng tức thì
+
+- Kiểm chứng v3.2.1: lỗi nói trọn hết câu đã hết (bấm sớm là cắt giữa câu), nhưng tai kiểm còn nghe rò ~1–2 giây phần tiếng đã đệm sau khi bấm. Gia cố: dungGiong gọi thêm load() sau khi gỡ src để phần tử phát nhả hẳn dữ liệu đã đệm; mỗi dòng thoại phát bằng một phần tử Audio mới (bỏ dùng chung một phần tử cho mọi dòng) — phần tử cũ đã dừng + nhả đệm thì không gì phát lại được.
+- Chỉ phát hành ở địa chỉ VIP như v3.2.1; các địa chỉ còn lại giữ nguyên.

@@ -761,8 +761,8 @@ body.world-toan .mua-card-cover{ background:linear-gradient(160deg,#1e6fb8 0%,#0
         <p><b>Dữ liệu truyện:</b> Thư viện Ánh Sao gồm các thế giới truyện của 7 môn học, 315 mùa truyện và 1.330 tập truyện, cùng các tập đấu trùm ở cuối mỗi chủ đề và sự kiện Đêm Chung Kết. Mỗi mùa truyện bám theo một chủ đề, mỗi tập truyện bám theo một bài học trong sách giáo khoa, để học sinh vừa phiêu lưu cùng Biệt đội Ánh Sao vừa ôn luyện đúng kiến thức của bài. Cốt truyện, lời thoại và thử thách được soạn riêng cho từng bài; câu hỏi trong thử thách được rút từ ngân hàng câu hỏi của đúng bài học đó.</p>
         <p><b>Ảnh minh họa:</b> ảnh được nạp từ thư mục “anh” đặt cạnh tệp của sản phẩm; mở tập nào app mới nạp ảnh của tập đó. Khi thư mục ảnh chưa có (ví dụ mở bản xem trước), truyện vẫn chơi trọn vẹn với nền cảnh dự phòng.</p>
         <p><b>Sự kiện Đêm Chung Kết:</b> ở Sảnh thư viện, mọi lớp đều dự được (không khóa tuần, không cần hoàn thành mùa nào trước). Cả lớp lần lượt thắp sáng các Cổng Thế Giới của khối lớp mình — mỗi cổng 2 đòn tri thức mức Kết nối/Vận dụng rút từ chính thế giới đó, trả lời sai có câu cứu viện mức Nhận biết của nhân vật dẫn đường — rồi đối mặt trùm cuối Sương Mù Quên Lãng với 6 đòn tổng hợp. Hoàn thành đêm, lớp nhận Huy Hiệu Ánh Sao trong Album hành trình.</p>
-        <p><b>Cập nhật:</b> v3.2.1 — Sửa lỗi giọng của đoạn dẫn vẫn nói tiếp sau khi bấm "Đối mặt thử thách": nay bấm sang câu hỏi là tiếng đoạn trước dừng ngay, dù câu dẫn chưa nói hết. Trước đó, v3.2.0 đã chuyển giọng nhân vật sang phát từ kho tĩnh chuyên dụng: tiếng về nhanh và đều hơn hẳn, mở tập là có tiếng ngay; đường phát cũ qua Google vẫn được giữ làm dự phòng tự động khi kho tĩnh có trục trặc.</p>
-        <p><b>Phiên bản:</b> v3.2.1 — xây trên bản chính thức v2.0 Đêm Chung Kết (Final Release), bản chính thức đầu tiên của sản phẩm. Thư viện Ánh Sao đã đủ trọn 6 thế giới với 315 mùa truyện, 1.330 tập, và mở thêm sự kiện đặc biệt Đêm Chung Kết — trận quyết chiến cuối cùng với Sương Mù Quên Lãng dành cho mọi lớp.</p>
+        <p><b>Cập nhật:</b> v3.2.2 — Gia cố thêm cho bản vá v3.2.1 (sửa lỗi giọng của đoạn dẫn vẫn nói tiếp sau khi bấm "Đối mặt thử thách"): nay bấm sang câu hỏi là tiếng đoạn trước dừng ngay, dù câu dẫn chưa nói hết — bộ phát nhả hẳn phần tiếng đã đệm và mỗi dòng phát bằng một phần tử mới, không rò lại vài từ cuối. Trước đó, v3.2.0 đã chuyển giọng nhân vật sang phát từ kho tĩnh chuyên dụng: tiếng về nhanh và đều hơn hẳn, mở tập là có tiếng ngay; đường phát cũ qua Google vẫn được giữ làm dự phòng tự động khi kho tĩnh có trục trặc.</p>
+        <p><b>Phiên bản:</b> v3.2.2 — xây trên bản chính thức v2.0 Đêm Chung Kết (Final Release), bản chính thức đầu tiên của sản phẩm. Thư viện Ánh Sao đã đủ trọn 6 thế giới với 315 mùa truyện, 1.330 tập, và mở thêm sự kiện đặc biệt Đêm Chung Kết — trận quyết chiến cuối cùng với Sương Mù Quên Lãng dành cho mọi lớp.</p>
       </div>
     </div>
   </div>
@@ -928,7 +928,7 @@ var CAU_TIENG_ANH_THEO_LOP = {};
 var CAU_KHOA_HOC_THEO_LOP = {};
 var CAU_CONG_NGHE_THEO_LOP = {};
 var CAU_LICH_SU_DIA_LI_THEO_LOP = {};
-var PHIEN_BAN = "v3.2.1";
+var PHIEN_BAN = "v3.2.2";
 var DICH_VU_DL_URL = "https://script.google.com/macros/s/AKfycbyzLjsUUtfUBXK3LZXBNtQfy36dX0EMtXVBQspmpRipNAE3QSI8yopI0zzS8EFMiS0gcw/exec";
 var PB_DULIEU = "v3.1.3";
 var AM_TINH_URL = "https://pub-349d00f579b3482c83e10c2141fc507e.r2.dev"; /* Kho tinh Cloudflare R2: goc phat MP3 long tieng cong khai (v3.2) */
@@ -1529,6 +1529,7 @@ function dungGiong(){
   if (amAudio) {
     try { amAudio.pause(); } catch (e) {}
     try { amAudio.removeAttribute("src"); } catch (e) {}
+    try { amAudio.load(); } catch (e) {} /* v3.2.2: buộc phần tử nhả hẳn phần tiếng đã đệm trong bộ nhớ phát — cắt tiếng tức thì, không rò 1–2 giây cuối (kể cả WebKit) */
   }
   if (amURL) { try { URL.revokeObjectURL(amURL); } catch (e) {} amURL = null; }
 }
@@ -1536,7 +1537,7 @@ function dungGiong(){
 function phatBlobGiong(blob){
   dungGiong();
   try {
-    if (!amAudio) amAudio = new Audio();
+    amAudio = new Audio(); /* v3.2.2: mỗi dòng một phần tử phát mới tinh — phần tử cũ đã dừng và nhả đệm, không gì phát lại được tiếng cũ */
     amURL = URL.createObjectURL(blob);
     amAudio.src = amURL;
     apTocDoGiong(); /* v3.1.5: đặt tốc độ giọng đã chọn trước khi phát */
@@ -1550,7 +1551,7 @@ function phatBlobGiong(blob){
 function phatTepGiong(duongDan){
   dungGiong();
   try {
-    if (!amAudio) amAudio = new Audio();
+    amAudio = new Audio(); /* v3.2.2: phần tử mới cho mỗi dòng như đường Blob */
     amAudio.onerror = function(){}; /* lỗi media: nuốt êm, không báo, không chặn truyện */
     amAudio.src = duongDan;
     apTocDoGiong(); /* v3.1.5: tốc độ giọng áp cho cả chế độ offline file: (chung một phần tử audio) */
