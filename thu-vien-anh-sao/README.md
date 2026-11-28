@@ -160,3 +160,9 @@ Từ v3.2.0, địa chỉ chính thức của sản phẩm là **https://lebaotu
 ## Đổi địa chỉ lần cuối (trưa 28/11/2026)
 
 Địa chỉ `truyen-tri-thuc/` từng công khai trong một khoảng ngắn sáng 28/11/2026 nên đã khóa hẳn (mở vào chỉ thấy trang khóa, như địa chỉ 007 cũ). Địa chỉ chính thức duy nhất từ nay là **https://lebaotu.github.io/tule-hnh/thu-vien-anh-sao/** — không đăng ở trang mục lục hay README gốc, chỉ giữ trong phòng Link sản phẩm của tác giả. Cổng mã truy cập của app vẫn là lớp khóa chính.
+
+## v3.2.1 (28/11/2026) — Vá lỗi tiếng không dừng khi vào thử thách
+
+- Thầy Tú báo từ thực tế dùng: đang nghe đoạn dẫn mà bấm "Đối mặt thử thách" thì tiếng đoạn dẫn vẫn nói tiếp cho hết câu ngay trên màn câu hỏi. Tái hiện được trên bản sống (vào thử thách rò ~3–4 giây; thoại sang thoại thì dừng ngay như thường).
+- Gốc lỗi: hàm nextQuestion (cửa vào câu hỏi và qua câu kế tiếp trong thử thách) thiếu lệnh dừng giọng — các cửa chuyển bước khác đều có. Vá đúng một chỗ: gọi dungGiong() ở đầu nextQuestion, kèm vô hiệu mọi fetch lẻ đang chờ phát như cơ chế sẵn có.
+- Giữ nguyên mọi thứ còn lại của v3.2.0 (kho tĩnh Cloudflare R2 + dự phòng Google, PB_DULIEU "v3.1.3", khóa ttt007_v1). Bản vá chỉ phát hành ở địa chỉ VIP; địa chỉ 007 cũ giữ bản v3.0 chia sẻ thử nghiệm, không đổi.
